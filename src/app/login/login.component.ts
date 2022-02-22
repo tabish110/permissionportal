@@ -83,6 +83,8 @@ loginuser(){
   user_login() {
     this.userlogin = true;
     this.userregister = false;
+    const userregister = false;
+
   }
 
   //mehtod for login it will check the user is in the list or not 
