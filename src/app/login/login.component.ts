@@ -75,15 +75,22 @@ loginuser(){
  
   userlogin = true;
   userregister = false;
+  userforgot= false;;
   //Buttons clicks functionalities hide and show
   user_register() {
+    this.userforgot=false;
     this.userlogin = false;
     this.userregister = true;
   }
   user_login() {
     this.userlogin = true;
     this.userregister = false;
-   
+    this.userforgot=false;
+  }
+  user_forgotpassword(){
+    this.userlogin=false;
+    this.userregister=false;
+    this.userforgot=true;
 
   }
 
