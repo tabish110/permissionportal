@@ -21,7 +21,10 @@
     </mat-card-actions>
     
     </form>
-    <button class="c-btn"  (click)="user_register()" color="primary">Sign Up</button>
+    <div class="center-button">
+    <button class="c-btn"  (click)="user_register()" color="primary">Sign Up |</button>
+    <button  (click)="user_forgotpassword()" class="c-btn">Forgot Password</button>
+  </div>
     </mat-card>
     </div>
 
@@ -61,9 +64,35 @@
             <button mat-stroked-button color="primary"  (click)="register()" class="btn-block  extra">Sign Up</button>
             
           </mat-card-actions>
+          <div class="center-button">
           <button (click)="user_login()" class="c-btn">Go Back</button>
+        </div>
           </form>
         </mat-card>
       </div>
   
-      
+      <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" *ngIf="userforgot" >
+        <mat-card class="box">
+          <mat-card-header>
+            <mat-card-title>Forgot Password</mat-card-title>
+          </mat-card-header>
+          <form [formGroup]="form" class="example-form">
+            <mat-card-content>
+              
+              <mat-form-field class="example-full-width">
+                <input matInput  placeholder="Email" type="email" formControlName="email" name="email" >
+                <mat-error *ngIf="form.hasError('required', 'email')">
+                  Please enter a valid email
+                </mat-error>
+              </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions >
+           
+            
+          </mat-card-actions>
+          <div class="center-button">
+          <button (click)="user_login()" class="c-btn">Go Back</button>
+        </div>
+          </form>
+        </mat-card>
+      </div>
