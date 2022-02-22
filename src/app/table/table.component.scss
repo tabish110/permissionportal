@@ -1,7 +1,7 @@
 :host ::ng-deep {
     .p-paginator {
         .p-paginator-current {
-            margin-left: auto;
+            margin-left: auto !important;
         }
     }
     .p-toolbar{flex-direction: row-reverse;}
@@ -10,7 +10,7 @@
         background-color: #D8DADC;
     
         .p-progressbar-value {
-            background-color: #607D8B;
+            background-color: #607D8B !important;
         }
     }
     .p-button.p-button-success, .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button {
