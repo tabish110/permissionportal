@@ -1,3 +1,5 @@
+
+<!-- LOGIN FORM  -->
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" *ngIf="userlogin">
   <mat-card class="box">
     <mat-card-header>
@@ -21,13 +23,14 @@
     </form>
     <div class="center-button">
       <button class="c-btn" type="button" (click)="user_register()" color="primary">Sign Up |</button>
-      <button type="button" (click)="user_forgotpassword()" class="c-btn">Forgot Password</button>
+      <button type="button" (click)="user_forgotpassword()" class="c-btn">Forgot Password |</button>
+      <button type="button" (click)="reset_password()" class="c-btn">Reset Password</button>
     </div>
   </mat-card>
 </div>
+<!-- LOGIN FORM END -->
 
-
-
+<!-- SIGNUP FORM -->
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" *ngIf="userregister">
   <mat-card class="box">
     <mat-card-header>
@@ -40,6 +43,9 @@
           <input matInput placeholder="Email" type="email" formControlName="email" name="email">
           <mat-error *ngIf="form.hasError('required', 'email')">
             Please enter a valid email
+          </mat-error>
+          <mat-error *ngIf="form.hasError('register', 'email')">
+            Duplicate Email
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
@@ -69,7 +75,10 @@
     </form>
   </mat-card>
 </div>
+<!-- SIGNUP FORM END -->
 
+
+<!-- FORGOT PASSWORD FORM -->
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" *ngIf="userforgot">
   <mat-card class="box">
     <mat-card-header>
@@ -84,7 +93,9 @@
             Please enter a valid email
           </mat-error>
         </mat-form-field>
-        <p>{{fill}}</p>
+        <div *ngIf="show">
+        <p>Your password is: {{fill}}</p>
+      </div>
       </mat-card-content>
       <mat-card-actions>
         <button mat-stroked-button color="primary" type="button" (click)="forgotpassworrd()"
@@ -97,3 +108,51 @@
     </form>
   </mat-card>
 </div>
+<!-- FORGOT PASSWORD FORM END -->
+
+<!-- RESET PASSWORD FORM -->
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" *ngIf="resetpassword">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Reset password</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="resetpass" class="example-form">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" type="email" formControlName="email" name="email">
+          <mat-error *ngIf="resetpass.hasError('required', 'email')">
+            Please enter a valid email
+          </mat-error>
+          <mat-error *ngIf="form.hasError('register', 'email')">
+            Duplicate Email
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" type="password" formControlName="newpassword">
+          <mat-error *ngIf="resetpass.hasError('required', 'newpassword')">
+            Please enter your password
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Confirm Password" formControlName="confirmnewpassword" type="password">
+          <mat-error *ngIf="resetpass.hasError('required', 'confirmnewpassword')">
+            Please enter your confirmpassword password
+          </mat-error>
+          <mat-error *ngIf="resetpass.hasError('confirmedValidator', 'confirmnewpassword')">
+            Password and confirm password not matched
+          </mat-error>
+        </mat-form-field>
+        
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-stroked-button color="primary" type="button" (click)="resetnewpassword()"
+          class="btn-block  extra">Reset</button>
+
+      </mat-card-actions>
+      <div class="center-button">
+        <button type="button" (click)="user_login()" class="c-btn">Go Back</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+<!-- RESET PASSWORD END -->
