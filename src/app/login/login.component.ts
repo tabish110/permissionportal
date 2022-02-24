@@ -14,8 +14,9 @@ export class LoginComponent {
   form: any;
   loginForm: any;
   forgot: any;
+  resetpass: any;
   fill: any;
-
+  show = false;
   //when we call another object from different class
   constructor(private dataService: DataService, private router: Router, private messageService: MessageService, private formBuilder: FormBuilder) { }
 
@@ -24,6 +25,7 @@ export class LoginComponent {
     this.form = this.createForm();
     this.loginForm = this.loginuser();
     this.forgot = this.forgotpass();
+    this.resetpass = this.reset()
   }
 
   //login form field
@@ -51,6 +53,16 @@ export class LoginComponent {
       email: [null, [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
     });
   }
+  // reset password field
+  reset() {
+    return this.formBuilder.group({
+      email: [null, [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      newpassword: [null, Validators.required],
+      confirmnewpassword: [null, Validators.required]
+    }, {
+      validator: this.confirmedValidator('newpassword', 'confirmnewpassword')
+    });
+  }
 
   // match password and confirm password
   confirmedValidator(password: string, confirmpassword: string) {
@@ -70,8 +82,16 @@ export class LoginComponent {
   //mehtod for saving new user.
   register() {
     if (this.form.status == 'VALID') {
-      this.dataService.doRegisterUser(this.form.value.email, this.form.value.password);
-      this.messageService.add({ severity: 'success', summary: 'Register', detail: 'Successfull' })
+
+      const read = this.dataService.registerUser.find(a => this.form.value.email === a.email);
+      // ? is use for to check undefine and null value on let and const
+      if (read?.email == this.form.value.email) {
+
+        this.messageService.add({ severity: 'error', summary: 'this user already exist', detail: 'Un Successfull' })
+      } else {
+        this.dataService.doRegisterUser(this.form.value.email, this.form.value.password);
+        this.messageService.add({ severity: 'success', summary: 'Register', detail: 'Successfull' })
+      }
       this.form.reset();
       this.user_login();
     } else {
@@ -81,22 +101,33 @@ export class LoginComponent {
 
   userlogin = true;
   userregister = false;
-  userforgot = false;;
+  userforgot = false;
+  resetpassword = false;
   //Buttons clicks functionalities hide and show
   user_register() {
     this.userforgot = false;
     this.userlogin = false;
     this.userregister = true;
+    this.resetpassword = false;
   }
   user_login() {
     this.userlogin = true;
     this.userregister = false;
     this.userforgot = false;
+    this.resetpassword = false;
   }
   user_forgotpassword() {
     this.userlogin = false;
     this.userregister = false;
     this.userforgot = true;
+    this.resetpassword = false;
+    this.show = false;
+  }
+  reset_password() {
+    this.resetpassword = true;
+    this.userlogin = false;
+    this.userregister = false;
+    this.userforgot = false;
   }
 
   //mehtod for login it will check the user is in the list or not 
@@ -125,30 +156,30 @@ export class LoginComponent {
     } else {
       let read = this.dataService.registerUser.find(a => this.forgot.value.email === a.email);
       if (read) {
-        this.messageService.add({ severity: 'success', summary: 'Password', detail: '' });
-        console.log(read.password)
         this.fill = read.password
+        this.messageService.add({ severity: 'success', summary: 'Your Password', detail: read.password });
+        this.show = true;
       } else {
         this.messageService.add({ severity: 'error', summary: 'Incorrect', detail: 'Not Successfull' });
       }
-
-      //  if (read.length >0 ){
-
-      //    console.log(read.password)
-      //    this.fill = read.forEach(current=>console.log('your password is',current.password));
-
-      //    this.forgot.reset();
-      //    this.fill = read.filter(function (current:any): void {
-      //        return (current.password);
-      //      });
-      // }else  (read.length == 0) {
-      //   this.messageService.add({severity:'error',summary: 'Incorrect', detail:'Not Successfull'});
-      // // }
-
     }
     this.forgot.reset();
   }
 
+  // to reset the password is the user is register
+  resetnewpassword() {
+    if (this.resetpass.invalid) {
+      this.messageService.add({ severity: 'error', summary: 'Please fill Required fields', detail: 'Try Again' })
+    } if (!this.dataService.registerUser.find(a => this.resetpass.value.email === a.email)) {
+      this.messageService.add({ severity: 'error', summary: 'Incorrect', detail: 'Not Successfull' });
+    }
+    else {
+      let findindex = this.dataService.registerUser.findIndex((item) => item.email == this.resetpass.value.email);
+
+      this.dataService.registerUser[findindex].password = this.resetpass.value.newpassword;
+      this.messageService.add({ severity: 'success', summary: 'Your New Password', detail: this.dataService.registerUser[findindex].password });
 
 
+    }
+  }
 }
