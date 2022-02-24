@@ -4,7 +4,7 @@
     margin-top: 10%;
     }
     mat-card{
-    min-width: 40%;
+    min-width: 45%;
     }
 
     html,
@@ -106,16 +106,19 @@
       background: white;
       color: #3535a1;
       border: none;
-      //margin-left: 160px;
       cursor: pointer;
       align-items: center;
       text-align: center;
   
     }
-    .extra {
-      margin-left: 106px !important ;
-      max-width: 50%; 
+    mat-card-actions {
+      text-align: center;
+      
     }
+    .btn-block{
+      max-width: 100px;
+    }
+    
     .center-button{
       text-align: center;
     }
