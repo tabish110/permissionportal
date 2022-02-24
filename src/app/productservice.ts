@@ -11,12 +11,12 @@ export class ProductService {
     status: string[] = ['OUTOFSTOCK', 'INSTOCK', 'LOWSTOCK'];
 
     productNames: string[] = [
-        "Bamboo Watch", 
-        "Black Watch", 
-        "Blue Band", 
-        "Blue T-Shirt", 
-        "Bracelet", 
-        "Brown Purse", 
+        "Bamboo Watch",
+        "Black Watch",
+        "Blue Band",
+        "Blue T-Shirt",
+        "Bracelet",
+        "Brown Purse",
         "Chakra Bracelet",
         "Galaxy Earrings",
         "Game Controller",
@@ -45,19 +45,19 @@ export class ProductService {
 
     constructor(private http: HttpClient) { }
 
-    
-// product jo store ha un ko bulawane ka liye 
+
+    // product jo store ha un ko bulawane ka liye 
     getProducts() {
         return this.http.get<any>('assets/products.json')
-        .toPromise()
-        .then(res => <Product[]>res.data)
-        .then(data => { return data; });
+            .toPromise()
+            .then(res => <Product[]>res.data)
+            .then(data => { return data; });
     }
 
-    
-//jb koi new product add kare gae is mehtod ki madad sa
+
+    //jb koi new product add kare gae is mehtod ki madad sa
     generatePrduct(): Product {
-        const product: Product =  {
+        const product: Product = {
             id: this.generateId(),
             name: this.generateName(),
             description: "Product Description",
@@ -68,7 +68,7 @@ export class ProductService {
             rating: this.generateRating()
         };
 
-       // product.image = product.name.toLocaleLowerCase().split(/[ ,]+/).join('-')+".jpg";;
+        // product.image = product.name.toLocaleLowerCase().split(/[ ,]+/).join('-')+".jpg";;
         return product;
     }
 
@@ -76,11 +76,11 @@ export class ProductService {
     generateId() {
         let text = "";
         let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        
+
         for (var i = 0; i < 5; i++) {
             text += possible.charAt(Math.floor(Math.random() * possible.length));
         }
-        
+
         return text;
     }
 
@@ -89,11 +89,11 @@ export class ProductService {
     }
 
     generatePrice() {
-        return Math.floor(Math.random() * Math.floor(299)+1);
+        return Math.floor(Math.random() * Math.floor(299) + 1);
     }
 
     generateQuantity() {
-        return Math.floor(Math.random() * Math.floor(75)+1);
+        return Math.floor(Math.random() * Math.floor(75) + 1);
     }
 
     generateStatus() {
@@ -101,6 +101,6 @@ export class ProductService {
     }
 
     generateRating() {
-        return Math.floor(Math.random() * Math.floor(5)+1);
+        return Math.floor(Math.random() * Math.floor(5) + 1);
     }
 }

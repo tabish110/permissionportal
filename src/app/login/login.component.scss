@@ -106,7 +106,7 @@
       background: white;
       color: #3535a1;
       border: none;
-      margin-left: 160px;
+      //margin-left: 160px;
       cursor: pointer;
       align-items: center;
       text-align: center;
@@ -115,4 +115,7 @@
     .extra {
       margin-left: 106px !important ;
       max-width: 50%; 
+    }
+    .center-button{
+      text-align: center;
     }
