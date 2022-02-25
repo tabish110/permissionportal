@@ -5,12 +5,12 @@ import { LoginComponent } from './login/login.component';
 
 
 
-const routes: Routes =[
-  {path:'' , component:LoginComponent},
-  {path:'table' ,component: TableComponent},
-  {path: 'login',component:LoginComponent}
+const routes: Routes = [
+  { path: '', component: LoginComponent },
+  { path: 'table', component: TableComponent },
+  { path: 'login', component: LoginComponent }
 
-  
+
 ];
 
 @NgModule({
