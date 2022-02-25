@@ -31,6 +31,7 @@ import { TableComponent } from './table/table.component';
 import { MaterialModule } from 'src/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TopbarComponent } from './topbar/topbar.component';
 
 
 
@@ -66,7 +67,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ReactiveFormsModule,
 
   ],
-  declarations: [AppComponent, LoginComponent, TableComponent,],
+  declarations: [AppComponent, LoginComponent, TableComponent, TopbarComponent,],
   bootstrap: [AppComponent],
   providers: [ProductService, MessageService, ConfirmationService]
 })
