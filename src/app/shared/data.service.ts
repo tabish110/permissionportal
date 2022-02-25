@@ -5,7 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class DataService {
 
-  registerUser: Array<any> = [];
+  registerUser: Array<any> = [
+    { email: 'admin@gmail.com' , password: 'admin'}
+  ];
 
 
   constructor() { }
