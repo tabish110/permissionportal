@@ -16,7 +16,7 @@
         </mat-form-field>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-stroked-button class="btn-block  extra" type="button" (click)="login()"
+        <button mat-stroked-button class="btn-block  extra" type="button" (click)="on_login()"
           color="primary">Login</button>
       </mat-card-actions>
     </form>
@@ -35,36 +35,36 @@
     <mat-card-header>
       <mat-card-title>Sign Up</mat-card-title>
     </mat-card-header>
-    <form [formGroup]="form" class="example-form">
+    <form [formGroup]="signupForm" class="example-form">
       <mat-card-content>
 
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Email" type="email" formControlName="email" name="email">
-          <mat-error *ngIf="form.hasError('required', 'email')">
+          <mat-error *ngIf="signupForm.hasError('required', 'email')">
             Please enter a valid email
           </mat-error>
-          <mat-error *ngIf="form.hasError('register', 'email')">
+          <mat-error *ngIf="signupForm.hasError('register', 'email')">
             Duplicate Email
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Password" type="password" formControlName="password">
-          <mat-error *ngIf="form.hasError('required', 'password')">
+          <mat-error *ngIf="signupForm.hasError('required', 'password')">
             Please enter your password
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Confirm Password" formControlName="confirmpassword" type="password">
-          <mat-error *ngIf="form.hasError('required', 'confirmpassword')">
+          <mat-error *ngIf="signupForm.hasError('required', 'confirmpassword')">
             Please enter your confirmpassword password
           </mat-error>
-          <mat-error *ngIf="form.hasError('confirmedValidator', 'confirmpassword')">
+          <mat-error *ngIf="signupForm.hasError('confirmedValidator', 'confirmpassword')">
             Password and confirm password not matched
           </mat-error>
         </mat-form-field>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-stroked-button color="primary" type="button" (click)="register()" class="btn-block  extra">Sign
+        <button mat-stroked-button color="primary" type="button" (click)="on_register()" class="btn-block  extra">Sign
           Up</button>
 
       </mat-card-actions>
@@ -83,12 +83,12 @@
     <mat-card-header>
       <mat-card-title>Forgot Password</mat-card-title>
     </mat-card-header>
-    <form [formGroup]="forgot" class="example-form">
+    <form [formGroup]="forgotPasswordForm" class="example-form">
       <mat-card-content>
 
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Email" type="email" formControlName="email" name="email">
-          <mat-error *ngIf="form.hasError('required', 'email')">
+          <mat-error *ngIf="forgotPasswordForm.hasError('required', 'email')">
             Please enter a valid email
           </mat-error>
         </mat-form-field>
@@ -97,7 +97,7 @@
         </div>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-stroked-button color="primary" type="button" (click)="forgotpassworrd()"
+        <button mat-stroked-button color="primary" type="button" (click)="on_forgotpassworrd()"
           class="btn-block  extra">Submit</button>
 
       </mat-card-actions>
@@ -115,36 +115,36 @@
     <mat-card-header>
       <mat-card-title>Reset password</mat-card-title>
     </mat-card-header>
-    <form [formGroup]="resetpass" class="example-form">
+    <form [formGroup]="resetPasswordForm" class="example-form">
       <mat-card-content>
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Email" type="email" formControlName="email" name="email">
-          <mat-error *ngIf="resetpass.hasError('required', 'email')">
+          <mat-error *ngIf="resetPasswordForm.hasError('required', 'email')">
             Please enter a valid email
           </mat-error>
-          <mat-error *ngIf="form.hasError('register', 'email')">
+          <mat-error *ngIf="resetPasswordForm.hasError('register', 'email')">
             Duplicate Email
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Password" type="password" formControlName="newpassword">
-          <mat-error *ngIf="resetpass.hasError('required', 'newpassword')">
+          <mat-error *ngIf="resetPasswordForm.hasError('required', 'newpassword')">
             Please enter your password
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Confirm Password" formControlName="confirmnewpassword" type="password">
-          <mat-error *ngIf="resetpass.hasError('required', 'confirmnewpassword')">
+          <mat-error *ngIf="resetPasswordForm.hasError('required', 'confirmnewpassword')">
             Please enter your confirmpassword password
           </mat-error>
-          <mat-error *ngIf="resetpass.hasError('confirmedValidator', 'confirmnewpassword')">
+          <mat-error *ngIf="resetPasswordForm.hasError('confirmedValidator', 'confirmnewpassword')">
             Password and confirm password not matched
           </mat-error>
         </mat-form-field>
 
       </mat-card-content>
       <mat-card-actions>
-        <button mat-stroked-button color="primary" type="button" (click)="resetnewpassword()"
+        <button mat-stroked-button color="primary" type="button" (click)="on_resetnewpassword()"
           class="btn-block  extra">Reset</button>
 
       </mat-card-actions>

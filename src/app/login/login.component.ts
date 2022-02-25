@@ -11,21 +11,52 @@ import { DataService } from '../shared/data.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  form: any;
+  signupForm: any;
   loginForm: any;
-  forgot: any;
-  resetpass: any;
+  forgotPasswordForm: any;
+  resetPasswordForm: any;
   fill: any;
   show = false;
+  userlogin = true;
+  userregister = false;
+  userforgot = false;
+  resetpassword = false;
+
   //when we call another object from different class
   constructor(private dataService: DataService, private router: Router, private messageService: MessageService, private formBuilder: FormBuilder) { }
 
+  //Buttons clicks functionalities hide and show
+  user_register() {
+    this.userforgot = false;
+    this.userlogin = false;
+    this.userregister = true;
+    this.resetpassword = false;
+  }
+  user_login() {
+    this.userlogin = true;
+    this.userregister = false;
+    this.userforgot = false;
+    this.resetpassword = false;
+  }
+  user_forgotpassword() {
+    this.userlogin = false;
+    this.userregister = false;
+    this.userforgot = true;
+    this.resetpassword = false;
+    this.show = false;
+  }
+  reset_password() {
+    this.resetpassword = true;
+    this.userlogin = false;
+    this.userregister = false;
+    this.userforgot = false;
+  }
   //to handle any initialization task,
   ngOnInit() {
-    this.form = this.createForm();
+    this.signupForm = this.createForm();
     this.loginForm = this.loginuser();
-    this.forgot = this.forgotpass();
-    this.resetpass = this.reset()
+    this.forgotPasswordForm = this.forgotpass();
+    this.resetPasswordForm = this.reset()
   }
 
   //login form field
@@ -80,59 +111,31 @@ export class LoginComponent {
   }
 
   //mehtod for saving new user.
-  register() {
-    if (this.form.status == 'VALID') {
+  on_register() {
+    if (this.signupForm.status == 'VALID') {
 
-      const read = this.dataService.registerUser.find(a => this.form.value.email === a.email);
+      const read = this.dataService.registerUser.find(a => this.signupForm.value.email === a.email);
       // ? is use for to check undefine and null value on let and const
-      if (read?.email == this.form.value.email) {
+      if (read?.email == this.signupForm.value.email) {
 
         this.messageService.add({ severity: 'error', summary: 'this user already exist', detail: 'Un Successfull' })
       } else {
-        this.dataService.doRegisterUser(this.form.value.email, this.form.value.password);
+        this.dataService.doRegisterUser(this.signupForm.value.email, this.signupForm.value.password);
         this.messageService.add({ severity: 'success', summary: 'Register', detail: 'Successfull' })
       }
-      this.form.reset();
+      this.signupForm.reset();
       this.user_login();
     } else {
       this.messageService.add({ severity: 'error', summary: 'Please fill Required fields', detail: 'Try Again' })
     }
   }
 
-  userlogin = true;
-  userregister = false;
-  userforgot = false;
-  resetpassword = false;
-  //Buttons clicks functionalities hide and show
-  user_register() {
-    this.userforgot = false;
-    this.userlogin = false;
-    this.userregister = true;
-    this.resetpassword = false;
-  }
-  user_login() {
-    this.userlogin = true;
-    this.userregister = false;
-    this.userforgot = false;
-    this.resetpassword = false;
-  }
-  user_forgotpassword() {
-    this.userlogin = false;
-    this.userregister = false;
-    this.userforgot = true;
-    this.resetpassword = false;
-    this.show = false;
-  }
-  reset_password() {
-    this.resetpassword = true;
-    this.userlogin = false;
-    this.userregister = false;
-    this.userforgot = false;
-  }
+
+
 
   //mehtod for login it will check the user is in the list or not 
   //then it will move forword  
-  login(): void {
+  on_login(): void {
     if (this.loginForm.invalid) {
       this.messageService.add({ severity: 'error', summary: 'Please fill Required fields', detail: 'Try Again' })
     } else {
@@ -149,12 +152,12 @@ export class LoginComponent {
   }
 
   //for getting password back if you forgot
-  forgotpassworrd() {
+  on_forgotpassworrd() {
 
-    if (this.forgot.invalid) {
+    if (this.forgotPasswordForm.invalid) {
       this.messageService.add({ severity: 'error', summary: 'Please fill Required fields', detail: 'Try Again' })
     } else {
-      let read = this.dataService.registerUser.find(a => this.forgot.value.email === a.email);
+      let read = this.dataService.registerUser.find(a => this.forgotPasswordForm.value.email === a.email);
       if (read) {
         this.fill = read.password
         this.messageService.add({ severity: 'success', summary: 'Your Password', detail: read.password });
@@ -165,20 +168,20 @@ export class LoginComponent {
 
 
     }
-    this.forgot.reset();
+    this.forgotPasswordForm.reset();
   }
 
-  // to reset the password is the user is register
-  resetnewpassword() {
-    if (this.resetpass.invalid) {
+  // to reset the password if the user is register
+  on_resetnewpassword() {
+    if (this.resetPasswordForm.invalid) {
       this.messageService.add({ severity: 'error', summary: 'Please fill Required fields', detail: 'Try Again' })
-    } if (!this.dataService.registerUser.find(a => this.resetpass.value.email === a.email)) {
+    } if (!this.dataService.registerUser.find(a => this.resetPasswordForm.value.email === a.email)) {
       this.messageService.add({ severity: 'error', summary: 'Incorrect', detail: 'Not Successfull' });
     }
     else {
-      let findindex = this.dataService.registerUser.findIndex((item) => item.email == this.resetpass.value.email);
+      let findindex = this.dataService.registerUser.findIndex((item) => item.email == this.resetPasswordForm.value.email);
 
-      this.dataService.registerUser[findindex].password = this.resetpass.value.newpassword;
+      this.dataService.registerUser[findindex].password = this.resetPasswordForm.value.newpassword;
       this.messageService.add({ severity: 'success', summary: 'Your New Password', detail: this.dataService.registerUser[findindex].password });
 
 
