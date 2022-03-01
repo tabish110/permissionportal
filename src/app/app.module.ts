@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ProductService } from './table/productservice';
 import { TableModule } from 'primeng/table';
@@ -32,6 +31,9 @@ import { MaterialModule } from 'src/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TopbarComponent } from './topbar/topbar.component';
+import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { DialogformComponent } from './dialogform/dialogform.component';
+import { CheckboxModule } from 'primeng/checkbox';
 
 
 
@@ -40,6 +42,7 @@ import { TopbarComponent } from './topbar/topbar.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    CheckboxModule,
     AppRoutingModule,
     FlexLayoutModule,
     MaterialModule,
@@ -67,7 +70,7 @@ import { TopbarComponent } from './topbar/topbar.component';
     ReactiveFormsModule,
 
   ],
-  declarations: [AppComponent, LoginComponent, TableComponent, TopbarComponent,],
+  declarations: [AppComponent, LoginComponent, TableComponent, TopbarComponent, ManageUsersComponent, DialogformComponent,],
   bootstrap: [AppComponent],
   providers: [ProductService, MessageService, ConfirmationService]
 })

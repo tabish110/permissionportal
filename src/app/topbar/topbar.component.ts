@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DataService } from '../shared/data.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-topbar',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopbarComponent implements OnInit {
 
-  constructor() { }
+
+  global = this.dataService.getName()
+
+
+  constructor(private dataService: DataService) {
+
+  }
+
+
 
   ngOnInit(): void {
+
   }
 
 }

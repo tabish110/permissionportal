@@ -1,3 +1,4 @@
+import { registerLocaleData } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,9 +22,12 @@ export class LoginComponent {
   userregister = false;
   userforgot = false;
   resetpassword = false;
+  global: any;
 
   //when we call another object from different class
-  constructor(private dataService: DataService, private router: Router, private messageService: MessageService, private formBuilder: FormBuilder) { }
+  constructor(private dataService: DataService, private router: Router, private messageService: MessageService, private formBuilder: FormBuilder) {
+
+  }
 
   //Buttons clicks functionalities hide and show
   redirectToRegisterForm() {
@@ -143,17 +147,29 @@ export class LoginComponent {
     if (this.loginForm.invalid) {
       this.messageService.add({ severity: 'error', summary: 'Please Fill Required Fields', detail: 'Try Again' })
     } else {
-      let check = this.dataService.registerUser.filter(a => this.loginForm.value.email === a.email
+      let checkLoginUser = this.dataService.registerUser.filter(a => this.loginForm.value.email === a.email
         && this.loginForm.value.password === a.password);
-      if (check.length > 0) {
-        this.messageService.add({ severity: 'success', summary: 'login', detail: 'Successfull' })
-        this.router.navigate(["table"]);
-      } else if (check.length == 0) {
+
+      if (checkLoginUser.length == 0) {
         this.messageService.add({ severity: 'error', summary: 'Incorrect Email Or Password', detail: 'Try Again' })
         return;
       }
+
+      // if (check){this.global = check}  
+      if (checkLoginUser[0].permission == true) {
+
+        this.dataService.setName(this.loginForm.value.email);
+        localStorage.setItem("username", this.loginForm.value.email);
+        this.router.navigate(["manageuser"]);
+        this.messageService.add({ severity: 'success', summary: 'login', detail: 'Successfull' });
+
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'UnAutherized User', detail: 'Try Again' })
+        return;
+      }
     }
-    this.loginForm.reset();
+
+    
   }
 
   //for getting password back if you forgot
