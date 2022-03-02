@@ -18,7 +18,8 @@ export class ManageUsersComponent implements OnInit {
     { field: 'permission', header: 'Login Permission' },
   ];
  
-  big = this.dataService.registerUser
+  big = [];
+  
 
 
   constructor(public dataService: DataService, private dialog: MatDialog, private messageService: MessageService, private confirmationService: ConfirmationService) { }
@@ -35,11 +36,9 @@ export class ManageUsersComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.big = this.dataService.registerUser.filter(val => val.id !== data.id);
+        this.dataService.registerUser = this.dataService.registerUser.filter(val => val.id !== data.id);
         this.big = [];
-        
-        this.dataService.registerUser.splice(-1)
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
+        this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User Deleted', life: 3000 });
       }
     });
 
