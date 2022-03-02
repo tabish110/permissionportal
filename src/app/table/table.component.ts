@@ -18,8 +18,11 @@ export class TableComponent implements OnInit {
 
   constructor(private productService: ProductService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
+
+
   ngOnInit(): void {
     this.productService.getProducts().then(data => this.products = data);
+
   }
 
   //to add a new product on list

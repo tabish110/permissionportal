@@ -1,3 +1,4 @@
+import { registerLocaleData } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,52 +16,58 @@ export class LoginComponent {
   loginForm: any;
   forgotPasswordForm: any;
   resetPasswordForm: any;
-  fill: any;
+  yourPasswordIs: any;
   show = false;
   userlogin = true;
   userregister = false;
   userforgot = false;
   resetpassword = false;
+  global: any;
 
   //when we call another object from different class
-  constructor(private dataService: DataService, private router: Router, private messageService: MessageService, private formBuilder: FormBuilder) { }
+  constructor(private dataService: DataService, private router: Router, private messageService: MessageService, private formBuilder: FormBuilder) {
+
+  }
 
   //Buttons clicks functionalities hide and show
-  user_register() {
+  redirectToRegisterForm() {
     this.userforgot = false;
     this.userlogin = false;
     this.userregister = true;
     this.resetpassword = false;
   }
-  user_login() {
+  redirectToLoginForm() {
     this.userlogin = true;
     this.userregister = false;
     this.userforgot = false;
     this.resetpassword = false;
+    this.loginForm.reset();
   }
-  user_forgotpassword() {
+  redirectToForgotpasswordForm() {
     this.userlogin = false;
     this.userregister = false;
     this.userforgot = true;
     this.resetpassword = false;
     this.show = false;
+    this.forgotPasswordForm.reset();
   }
-  reset_password() {
+  redirectToResetpasswordForm() {
     this.resetpassword = true;
     this.userlogin = false;
     this.userregister = false;
     this.userforgot = false;
+    this.resetPasswordForm.reset();
   }
   //to handle any initialization task,
   ngOnInit() {
-    this.signupForm = this.createForm();
-    this.loginForm = this.loginuser();
-    this.forgotPasswordForm = this.forgotpass();
-    this.resetPasswordForm = this.reset()
+    this.signupForm = this.userSignupFormBuilder();
+    this.loginForm = this.userLoginFormBuilder();
+    this.forgotPasswordForm = this.userForgotpasswordFormBuilder();
+    this.resetPasswordForm = this.userResetpasswordFormBuilder();
   }
 
   //login form field
-  loginuser() {
+  userLoginFormBuilder() {
     return this.formBuilder.group({
       email: [null, [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: [null, Validators.required],
@@ -68,39 +75,39 @@ export class LoginComponent {
   }
 
   //signup form field
-  createForm() {
+  userSignupFormBuilder() {
     return this.formBuilder.group({
       email: [null, [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: [null, Validators.required],
       confirmpassword: [null, Validators.required]
     }, {
-      validator: this.confirmedValidator('password', 'confirmpassword')
+      validator: this.confirmedPasswordValidator('password', 'confirmpassword')
     });
   }
 
   //forgot form feild
-  forgotpass() {
+  userForgotpasswordFormBuilder() {
     return this.formBuilder.group({
       email: [null, [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
     });
   }
   // reset password field
-  reset() {
+  userResetpasswordFormBuilder() {
     return this.formBuilder.group({
       email: [null, [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       newpassword: [null, Validators.required],
       confirmnewpassword: [null, Validators.required]
     }, {
-      validator: this.confirmedValidator('newpassword', 'confirmnewpassword')
+      validator: this.confirmedPasswordValidator('newpassword', 'confirmnewpassword')
     });
   }
 
   // match password and confirm password
-  confirmedValidator(password: string, confirmpassword: string) {
+  confirmedPasswordValidator(password: string, confirmpassword: string) {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[password];
       const matchingControl = formGroup.controls[confirmpassword];
-      if (matchingControl.errors && !matchingControl.errors['confirmedValidator']) {
+      if (matchingControl.errors && !matchingControl.errors['confirmedPasswordValidator']) {
         return;
       } if (control.value !== matchingControl.value) {
         matchingControl.setErrors({ confirmedValidator: true });
@@ -111,22 +118,23 @@ export class LoginComponent {
   }
 
   //mehtod for saving new user.
-  on_register() {
+  onRegister() {
     if (this.signupForm.status == 'VALID') {
 
-      const read = this.dataService.registerUser.find(a => this.signupForm.value.email === a.email);
+      const registerUser = this.dataService.registerUser.find(a => this.signupForm.value.email === a.email);
       // ? is use for to check undefine and null value on let and const
-      if (read?.email == this.signupForm.value.email) {
+      if (registerUser?.email == this.signupForm.value.email) {
 
-        this.messageService.add({ severity: 'error', summary: 'this user already exist', detail: 'Un Successfull' })
+        this.messageService.add({ severity: 'error', summary: 'User Already Exist', detail: 'Un Successfull' })
+        return;
       } else {
         this.dataService.doRegisterUser(this.signupForm.value.email, this.signupForm.value.password);
         this.messageService.add({ severity: 'success', summary: 'Register', detail: 'Successfull' })
       }
       this.signupForm.reset();
-      this.user_login();
+      this.redirectToLoginForm();
     } else {
-      this.messageService.add({ severity: 'error', summary: 'Please fill Required fields', detail: 'Try Again' })
+      this.messageService.add({ severity: 'error', summary: 'Please Fill Required Fields', detail: 'Try Again' })
     }
   }
 
@@ -135,35 +143,49 @@ export class LoginComponent {
 
   //mehtod for login it will check the user is in the list or not 
   //then it will move forword  
-  on_login(): void {
+  onLogin(): void {
     if (this.loginForm.invalid) {
-      this.messageService.add({ severity: 'error', summary: 'Please fill Required fields', detail: 'Try Again' })
+      this.messageService.add({ severity: 'error', summary: 'Please Fill Required Fields', detail: 'Try Again' })
     } else {
-      let check = this.dataService.registerUser.filter(a => this.loginForm.value.email === a.email
+      let checkLoginUser = this.dataService.registerUser.filter(a => this.loginForm.value.email === a.email
         && this.loginForm.value.password === a.password);
-      if (check.length > 0) {
-        this.messageService.add({ severity: 'success', summary: 'login', detail: 'Successfull' })
-        this.router.navigate(["table"]);
-      } else if (check.length == 0) {
-        this.messageService.add({ severity: 'error', summary: 'incorrect email and password', detail: 'Try Again' })
+
+      if (checkLoginUser.length == 0) {
+        this.messageService.add({ severity: 'error', summary: 'Incorrect Email Or Password', detail: 'Try Again' })
+        return;
+      }
+
+      // if (check){this.global = check}  
+      if (checkLoginUser[0].permission == true) {
+
+        this.dataService.setName(this.loginForm.value.email);
+        localStorage.setItem("username", this.loginForm.value.email);
+        this.router.navigate(["manageuser"]);
+        this.messageService.add({ severity: 'success', summary: 'login', detail: 'Successfull' });
+
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'UnAutherized User', detail: 'Try Again' })
+        return;
       }
     }
-    this.loginForm.reset();
+
+    
   }
 
   //for getting password back if you forgot
-  on_forgotpassworrd() {
+  onForgotpassword() {
 
     if (this.forgotPasswordForm.invalid) {
-      this.messageService.add({ severity: 'error', summary: 'Please fill Required fields', detail: 'Try Again' })
+      this.messageService.add({ severity: 'error', summary: 'Please Fill Required Fields', detail: 'Try Again' })
     } else {
-      let read = this.dataService.registerUser.find(a => this.forgotPasswordForm.value.email === a.email);
-      if (read) {
-        this.fill = read.password
-        this.messageService.add({ severity: 'success', summary: 'Your Password', detail: read.password });
+      let readPasword = this.dataService.registerUser.find(a => this.forgotPasswordForm.value.email === a.email);
+      if (readPasword) {
+        this.yourPasswordIs = readPasword.password
+        this.messageService.add({ severity: 'success', summary: 'Your Password', detail: readPasword.password });
         this.show = true;
       } else {
-        this.messageService.add({ severity: 'error', summary: 'Incorrect', detail: 'Not Successfull' });
+        this.messageService.add({ severity: 'error', summary: 'Incorrect Email', detail: 'Not Successfull' });
+        return;
       }
 
 
@@ -172,11 +194,11 @@ export class LoginComponent {
   }
 
   // to reset the password if the user is register
-  on_resetnewpassword() {
+  onResetPassword() {
     if (this.resetPasswordForm.invalid) {
-      this.messageService.add({ severity: 'error', summary: 'Please fill Required fields', detail: 'Try Again' })
+      this.messageService.add({ severity: 'error', summary: 'Please Fill Required Fields', detail: 'Try Again' })
     } if (!this.dataService.registerUser.find(a => this.resetPasswordForm.value.email === a.email)) {
-      this.messageService.add({ severity: 'error', summary: 'Incorrect', detail: 'Not Successfull' });
+      this.messageService.add({ severity: 'error', summary: 'Incorrect Email', detail: 'Not Successfull' });
     }
     else {
       let findindex = this.dataService.registerUser.findIndex((item) => item.email == this.resetPasswordForm.value.email);
@@ -184,7 +206,7 @@ export class LoginComponent {
       this.dataService.registerUser[findindex].password = this.resetPasswordForm.value.newpassword;
       this.messageService.add({ severity: 'success', summary: 'Your New Password', detail: this.dataService.registerUser[findindex].password });
 
-
+      this.redirectToLoginForm();
     }
   }
 }

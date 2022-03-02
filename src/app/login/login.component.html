@@ -16,14 +16,14 @@
         </mat-form-field>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-stroked-button class="btn-block  extra" type="button" (click)="on_login()"
+        <button mat-stroked-button class="btn-block  extra" type="button" (click)="onLogin()"
           color="primary">Login</button>
       </mat-card-actions>
     </form>
     <div class="center-button">
-      <button class="c-btn" type="button" (click)="user_register()" color="primary">Sign Up |</button>
-      <button type="button" (click)="user_forgotpassword()" class="c-btn">Forgot Password |</button>
-      <button type="button" (click)="reset_password()" class="c-btn">Reset Password</button>
+      <button class="c-btn" type="button" (click)="redirectToRegisterForm()" color="primary">Sign Up |</button>
+      <button type="button" (click)="redirectToForgotpasswordForm()" class="c-btn">Forgot Password |</button>
+      <button type="button" (click)="redirectToResetpasswordForm()" class="c-btn">Reset Password</button>
     </div>
   </mat-card>
 </div>
@@ -58,18 +58,18 @@
           <mat-error *ngIf="signupForm.hasError('required', 'confirmpassword')">
             Please enter your confirmpassword password
           </mat-error>
-          <mat-error *ngIf="signupForm.hasError('confirmedValidator', 'confirmpassword')">
+          <mat-error *ngIf="signupForm.hasError('confirmedPasswordValidator', 'confirmpassword')">
             Password and confirm password not matched
           </mat-error>
         </mat-form-field>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-stroked-button color="primary" type="button" (click)="on_register()" class="btn-block  extra">Sign
+        <button mat-stroked-button color="primary" type="button" (click)="onRegister()" class="btn-block  extra">Sign
           Up</button>
 
       </mat-card-actions>
       <div class="center-button">
-        <button type="button" (click)="user_login()" class="c-btn">Go Back</button>
+        <button type="button" (click)="redirectToLoginForm()" class="c-btn">Go Back</button>
       </div>
     </form>
   </mat-card>
@@ -93,16 +93,16 @@
           </mat-error>
         </mat-form-field>
         <div *ngIf="show">
-          <p>Your password is: {{fill}}</p>
+          <p>Your password is: {{yourPasswordIs}}</p>
         </div>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-stroked-button color="primary" type="button" (click)="on_forgotpassworrd()"
+        <button mat-stroked-button color="primary" type="button" (click)="onForgotpassword()"
           class="btn-block  extra">Submit</button>
 
       </mat-card-actions>
       <div class="center-button">
-        <button type="button" (click)="user_login()" class="c-btn">Go Back</button>
+        <button type="button" (click)="redirectToLoginForm()" class="c-btn">Go Back</button>
       </div>
     </form>
   </mat-card>
@@ -137,19 +137,19 @@
           <mat-error *ngIf="resetPasswordForm.hasError('required', 'confirmnewpassword')">
             Please enter your confirmpassword password
           </mat-error>
-          <mat-error *ngIf="resetPasswordForm.hasError('confirmedValidator', 'confirmnewpassword')">
+          <mat-error *ngIf="resetPasswordForm.hasError('confirmedPasswordValidator', 'confirmnewpassword')">
             Password and confirm password not matched
           </mat-error>
         </mat-form-field>
 
       </mat-card-content>
       <mat-card-actions>
-        <button mat-stroked-button color="primary" type="button" (click)="on_resetnewpassword()"
+        <button mat-stroked-button color="primary" type="button" (click)="onResetPassword()"
           class="btn-block  extra">Reset</button>
 
       </mat-card-actions>
       <div class="center-button">
-        <button type="button" (click)="user_login()" class="c-btn">Go Back</button>
+        <button type="button" (click)="redirectToLoginForm()" class="c-btn">Go Back</button>
       </div>
     </form>
   </mat-card>
