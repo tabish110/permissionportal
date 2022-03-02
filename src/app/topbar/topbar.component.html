@@ -18,21 +18,21 @@
 
 <mat-sidenav-container>
     <mat-sidenav #sidenav>
-      <mat-nav-list>
+      <mat-nav-list >
   
-        <a mat-list-item [routerLink]="'/manageuser'"> Manage User</a>
-        <a mat-list-item [routerLink]="'/table'"> Product List </a>
-        <a mat-list-item [routerLink]="'/manageteam'"> Manage Team </a>
+        <a mat-list-item [routerLink]="'/manageuser'" (click)="sidenav.toggle()"> Manage User</a>
+        <a mat-list-item [routerLink]="'/table'" (click)="sidenav.toggle()"> Product List </a>
+        <a mat-list-item [routerLink]="'/manageteam'" (click)="sidenav.toggle()"> Manage Team </a>
         
         <a mat-list-item (click)="sidenav.toggle()"  mat-list-item>Close</a>
   
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <div >
+      
   
         <router-outlet></router-outlet>
-      </div>
+      
     </mat-sidenav-content>
   </mat-sidenav-container>
 
