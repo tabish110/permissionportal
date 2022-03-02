@@ -1,20 +1,45 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TableComponent } from './table/table.component';
-import { LoginComponent } from './login/login.component';
-import { TopbarComponent } from './topbar/topbar.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { FeatureComponent } from './feature/feature.component';
+import { ManageTeamComponent } from './manage-team/manage-team.component';
 
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'table', component: TableComponent },
-  { path: 'top', component: TopbarComponent },
-  { path: 'manageuser', component: ManageUsersComponent }
+  
+  {
+    path: '',
+    loadChildren: () => import('./logincomponent/login.module').then(m => m.LoginModule)
+  },
+  {
+    path: '',
+    component: FeatureComponent, children:[
+       {
+         path: 'manageuser' , component:ManageUsersComponent
+       },
 
+      {
+        path:'table', component: TableComponent 
+        
+      },
+      {
+        path:'manageteam', component: ManageTeamComponent 
+        
+      },
 
+    ]
+  },
+ 
+  {
+    path: '**',
+    loadChildren: () => import('./logincomponent/login.module').then(m => m.LoginModule)
+  }
 ];
+
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

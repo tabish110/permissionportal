@@ -1,17 +1,18 @@
-<app-topbar></app-topbar>
+
 
 <p-table #grid [columns]="permissionCols" class="ds-permission" [value]="this.dataService.registerUser"
     [paginator]="true" [rows]="10" sortMode="multiple" [rowsPerPageOptions]="[10,20,50,100]"
     [showCurrentPageReport]="true" [responsive]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
     selectionMode="multiple" dataKey="key_id">
-    <!-- <ng-template pTemplate="caption">
+    <ng-template pTemplate="caption">
                 <div class="table-header">
                     <div class="global-search">
-                        
+                        <input pInputText type="text" #input (input)="grid.filterGlobal(input.value,'contains')"
+                    placeholder="search..." />
                     </div>
                 </div>
-            </ng-template> -->
+            </ng-template>
 
     <ng-template pTemplate="header" let-columns>
         <tr>
@@ -19,7 +20,7 @@
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
             </th>
-            <th>
+            <th class="fixed">
                 Action
             </th>
         </tr>
@@ -35,7 +36,7 @@
                 <span *ngSwitchCase="'password'">{{rowData[col.field]}}</span>
                 <span *ngSwitchCase="'permission'">
                     <!-- <p-checkbox [value]="true" binary="true"></p-checkbox> -->
-                    <p-checkbox [(ngModel)]="rowData[col.field]" [binary]="true"></p-checkbox>
+                    <p-checkbox [(ngModel)]="rowData[col.field]" [disabled]="true" [binary]="true"></p-checkbox>
                 </span>
             </td>
             <!-- <td>
@@ -43,9 +44,9 @@
                         <p-checkbox  (change)="rowData" [value]="'permission'"  ></p-checkbox>
                     </td> -->
             <td>
-                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded  p-mr-2"
                     (click)="onOpenDialog(rowData)"></button>
-                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded "
                     (click)="onRemove(rowData)"></button>
             </td>
         </tr>
