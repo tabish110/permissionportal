@@ -16,7 +16,7 @@ export class LoginComponent {
   loginForm: any;
   forgotPasswordForm: any;
   resetPasswordForm: any;
-  fill: any;
+  yourPasswordIs: any;
   show = false;
   userlogin = true;
   userregister = false;
@@ -121,9 +121,9 @@ export class LoginComponent {
   onRegister() {
     if (this.signupForm.status == 'VALID') {
 
-      const read = this.dataService.registerUser.find(a => this.signupForm.value.email === a.email);
+      const registerUser = this.dataService.registerUser.find(a => this.signupForm.value.email === a.email);
       // ? is use for to check undefine and null value on let and const
-      if (read?.email == this.signupForm.value.email) {
+      if (registerUser?.email == this.signupForm.value.email) {
 
         this.messageService.add({ severity: 'error', summary: 'User Already Exist', detail: 'Un Successfull' })
         return;
@@ -178,10 +178,10 @@ export class LoginComponent {
     if (this.forgotPasswordForm.invalid) {
       this.messageService.add({ severity: 'error', summary: 'Please Fill Required Fields', detail: 'Try Again' })
     } else {
-      let read = this.dataService.registerUser.find(a => this.forgotPasswordForm.value.email === a.email);
-      if (read) {
-        this.fill = read.password
-        this.messageService.add({ severity: 'success', summary: 'Your Password', detail: read.password });
+      let readPasword = this.dataService.registerUser.find(a => this.forgotPasswordForm.value.email === a.email);
+      if (readPasword) {
+        this.yourPasswordIs = readPasword.password
+        this.messageService.add({ severity: 'success', summary: 'Your Password', detail: readPasword.password });
         this.show = true;
       } else {
         this.messageService.add({ severity: 'error', summary: 'Incorrect Email', detail: 'Not Successfull' });

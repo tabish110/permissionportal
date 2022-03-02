@@ -18,7 +18,7 @@ export class ManageUsersComponent implements OnInit {
     { field: 'permission', header: 'Login Permission' },
   ];
  
-  big = [];
+  deletedField = [];
   
 
 
@@ -29,7 +29,7 @@ export class ManageUsersComponent implements OnInit {
   }
 
 
-  remove(data: any) {
+  onRemove(data: any) {
     console.log(data)
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete ' + data.email + '?',
@@ -37,14 +37,14 @@ export class ManageUsersComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.dataService.registerUser = this.dataService.registerUser.filter(val => val.id !== data.id);
-        this.big = [];
+        this.deletedField = [];
         this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User Deleted', life: 3000 });
       }
     });
 
   }
  
-  openDialog(data: any) {
+  onOpenDialog(data: any) {
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;

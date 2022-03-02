@@ -14,11 +14,12 @@ export class DataService {
 
 
   constructor() { }
+  // to save a user
   doRegisterUser(email: string, password: string) {
     this.registerUser.push({ id: this.generateId(), email, password, permission: false })
     console.log(this.registerUser)
   }
-
+  
   setName(email: string) {
     this.name = (email)
 
