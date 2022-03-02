@@ -25,7 +25,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { LoginComponent } from './login/login.component';
+
 import { TableComponent } from './table/table.component';
 import { MaterialModule } from 'src/material.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -34,6 +34,8 @@ import { TopbarComponent } from './topbar/topbar.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { DialogformComponent } from './dialogform/dialogform.component';
 import { CheckboxModule } from 'primeng/checkbox';
+import { FeatureComponent } from './feature/feature.component';
+import { ManageTeamComponent } from './manage-team/manage-team.component';
 
 
 
@@ -70,8 +72,17 @@ import { CheckboxModule } from 'primeng/checkbox';
     ReactiveFormsModule,
 
   ],
-  declarations: [AppComponent, LoginComponent, TableComponent, TopbarComponent, ManageUsersComponent, DialogformComponent,],
-  bootstrap: [AppComponent],
+  exports: [MaterialModule, FlexLayoutModule],
+  declarations: [
+    AppComponent,  
+    TableComponent, 
+    TopbarComponent, 
+    ManageUsersComponent, 
+    DialogformComponent,
+    FeatureComponent,
+    ManageTeamComponent],
+    
+    bootstrap: [AppComponent],
   providers: [ProductService, MessageService, ConfirmationService]
 })
 

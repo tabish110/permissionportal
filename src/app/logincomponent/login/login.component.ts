@@ -1,9 +1,11 @@
-import { registerLocaleData } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { DataService } from '../shared/data.service';
+import { DataService } from 'src/app/shared/data.service';
+
 
 
 @Component({
@@ -195,18 +197,26 @@ export class LoginComponent {
 
   // to reset the password if the user is register
   onResetPassword() {
-    if (this.resetPasswordForm.invalid) {
+    if(this.resetPasswordForm.value.newpassword !== this.resetPasswordForm.value.confirmnewpassword){
+      this.messageService.add({ severity: 'error', summary: 'password Doesnot Match', detail: 'Try Again' })
+    }
+    else if (this.resetPasswordForm.invalid) {
       this.messageService.add({ severity: 'error', summary: 'Please Fill Required Fields', detail: 'Try Again' })
-    } if (!this.dataService.registerUser.find(a => this.resetPasswordForm.value.email === a.email)) {
-      this.messageService.add({ severity: 'error', summary: 'Incorrect Email', detail: 'Not Successfull' });
-    }
-    else {
-      let findindex = this.dataService.registerUser.findIndex((item) => item.email == this.resetPasswordForm.value.email);
+      
+    } else {
+      
+       if (!this.dataService.registerUser.find(a => this.resetPasswordForm.value.email === a.email)) {
+        this.messageService.add({ severity: 'error', summary: 'Incorrect Email', detail: 'Not Successfull' });
+      }
+      else {
+        let findindex = this.dataService.registerUser.findIndex((item) => item.email == this.resetPasswordForm.value.email);
 
-      this.dataService.registerUser[findindex].password = this.resetPasswordForm.value.newpassword;
-      this.messageService.add({ severity: 'success', summary: 'Your New Password', detail: this.dataService.registerUser[findindex].password });
+        this.dataService.registerUser[findindex].password = this.resetPasswordForm.value.newpassword;
+        this.messageService.add({ severity: 'success', summary: 'Your New Password', detail: this.dataService.registerUser[findindex].password });
 
-      this.redirectToLoginForm();
+        this.redirectToLoginForm();
+      }
     }
+      
   }
 }

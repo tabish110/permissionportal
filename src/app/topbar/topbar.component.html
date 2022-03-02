@@ -1,18 +1,39 @@
 <mat-toolbar color="stroke">
-
+    <button mat-icon-button>
+        <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+      </button>
     <h1> Permission Portal</h1>
-
-
 
     <span class="example-spacer"></span>
 
-    <span>{{global}}</span>
+    <span class="p-button-success p-mr-2">{{global}}</span>
 
-    <button pButton pRipple label="Manage User" icon="pi pi-sign-out" class="p-button-success p-mr-2"
+    <!-- <button pButton pRipple label="Manage User" icon="pi pi-sign-out" class="p-button-success p-mr-2"
         routerLink="/manageuser"></button>
+    <button pButton pRipple label="Product List" icon="" class="p-button-success p-mr-2" routerLink="/table"></button> -->
 
-    <button pButton pRipple label="Product List" icon="" class="p-button-success p-mr-2" routerLink="/table"></button>
-
-    <button pButton pRipple label="Logout" icon="pi pi-sign-out" class="p-button-success p-mr-2"
-        routerLink="/"></button>
+    <button pButton pRipple label="Logout" icon="pi pi-sign-out" class=" p-mr-2"
+        (click)="logoutConfirmation()"></button>
 </mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+  
+        <a mat-list-item [routerLink]="'/manageuser'"> Manage User</a>
+        <a mat-list-item [routerLink]="'/table'"> Product List </a>
+        <a mat-list-item [routerLink]="'/manageteam'"> Manage Team </a>
+        
+        <a mat-list-item (click)="sidenav.toggle()"  mat-list-item>Close</a>
+  
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div >
+  
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  

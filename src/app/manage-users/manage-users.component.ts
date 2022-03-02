@@ -18,7 +18,7 @@ export class ManageUsersComponent implements OnInit {
     { field: 'permission', header: 'Login Permission' },
   ];
  
-  deletedField = [];
+ 
   
 
 
@@ -36,10 +36,13 @@ export class ManageUsersComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.dataService.registerUser = this.dataService.registerUser.filter(val => val.id !== data.id);
-        this.deletedField = [];
-        this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User Deleted', life: 3000 });
-      }
+        if(data.id > 0){
+          const index = this.dataService.registerUser.findIndex(val => val.id === data.id)
+          this.dataService.registerUser.splice(index,1)
+          this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User Deleted', life: 3000 });
+        // this.dataService.registerUser = this.dataService.registerUser.filter(val => val.id !== data.id);
+        // this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User Deleted', life: 3000 });
+      }}
     });
 
   }
