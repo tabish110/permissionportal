@@ -26,7 +26,7 @@ export class DataService {
     this.registerUser.push({ id: this.generateId(), email, password, permission: false })
     console.log(this.registerUser)
   }
-  
+
   setName(email: string) {
     this.name = (email)
 
@@ -41,11 +41,6 @@ export class DataService {
     text += this.registerUser.length;
     return text;
   }
-
-  // permission(){
-  // let permission
-  // return permission = false
-  // }
 
 }
 
