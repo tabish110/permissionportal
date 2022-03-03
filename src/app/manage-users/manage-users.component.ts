@@ -17,9 +17,6 @@ export class ManageUsersComponent implements OnInit {
     { field: 'password', header: 'Password' },
     { field: 'permission', header: 'Login Permission' },
   ];
- 
- 
-  
 
 
   constructor(public dataService: DataService, private dialog: MatDialog, private messageService: MessageService, private confirmationService: ConfirmationService) { }
@@ -36,17 +33,18 @@ export class ManageUsersComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        if(data.id > 0){
+        if (data.id > 0) {
           const index = this.dataService.registerUser.findIndex(val => val.id === data.id)
-          this.dataService.registerUser.splice(index,1)
+          this.dataService.registerUser.splice(index, 1)
           this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User Deleted', life: 3000 });
-        // this.dataService.registerUser = this.dataService.registerUser.filter(val => val.id !== data.id);
-        // this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User Deleted', life: 3000 });
-      }}
+          // this.dataService.registerUser = this.dataService.registerUser.filter(val => val.id !== data.id);
+          // this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User Deleted', life: 3000 });
+        }
+      }
     });
 
   }
- 
+
   onOpenDialog(data: any) {
 
     const dialogConfig = new MatDialogConfig();
