@@ -13,13 +13,13 @@ import { DataService } from '../shared/data.service';
 export class ManageUsersComponent implements OnInit {
 
   permissionCols = [
-
+    // { field: 'id', header: 'ID' },
     { field: 'fullname', header: 'Name' },
-    { field: 'username', header: 'User Name' },
+    // { field: 'username', header: 'User Name' },
     { field: 'phonenumber', header: 'Phone Number' },
     { field: 'email', header: 'Email' },
     { field: 'password', header: 'Password' },
-    { field: 'permission', header: 'Login Permission' },
+    { field: 'permission', header: 'Permission' },
     { field: 'team', header: 'Team' },
     { field: 'roles', header: 'Roles' },
   ];

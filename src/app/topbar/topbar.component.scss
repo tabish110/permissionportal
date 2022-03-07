@@ -8,8 +8,8 @@
   color: white;
 }
 mat-nav-list {
-  padding: 25px 0;
-  width: 18rem;
+  
+  width: 15rem;
 }
 
 mat-sidenav-container.mat-drawer-container.mat-sidenav-container.mat-drawer-transition.mat-drawer-container-has-open {
@@ -22,4 +22,7 @@ mat-menu,
 .username{
   padding: inherit;
   text-transform: uppercase;
+}
+.mat-list-base{
+  padding: 0px;
 }

@@ -38,13 +38,13 @@ export class DialogformComponent implements OnInit {
     return this.formBuilder.group({
       email: [this.data.source.email, [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: [this.data.source.password, Validators.required],
-      confirmpassword: [this.data.source.password, Validators.required],
+      confirmpassword: [this.data.source.confirmpassword, Validators.required],
       permission: [this.data.source.permission],
       username: [this.data.source.username, Validators.required],
       fullname: [this.data.source.fullname, Validators.required],
-      phonenumber: [this.data.source.phonenumber, Validators.required],
-      team: [this.data.source.team, Validators.required],
-      roles: [this.data.source.roles, Validators.required],
+      phonenumber: [this.data.source.phonenumber,  [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      team: [this.data.source.team],
+      roles: [this.data.source.roles],
     }, {
       validator: this.confirmedPasswordValidator('password', 'confirmpassword')
 
@@ -90,9 +90,10 @@ export class DialogformComponent implements OnInit {
 
         }
         this.dialogRef.close();
+        
       } else { this.messageService.add({ severity: 'error', summary: 'Fill all the field' }) }
     } else if (this.data.isEdit == false) {
-
+      
       let findindex = this.dataService.registerUser.findIndex((item) => item.id == this.data.source.id);
       this.dataService.registerUser[findindex].email = this.dialogform.value.email;
       this.dataService.registerUser[findindex].password = this.dialogform.value.password;
@@ -103,9 +104,9 @@ export class DialogformComponent implements OnInit {
       this.dataService.registerUser[findindex].team = this.dialogform.value.team;
       this.dataService.registerUser[findindex].roles = this.dialogform.value.roles;
       this.messageService.add({ severity: 'success', summary: 'Record Updated', });
-      this.dialogRef.close();
-    }
-
+      this.dialogRef.close();}
+    
+    
   }
 
   onClose() {

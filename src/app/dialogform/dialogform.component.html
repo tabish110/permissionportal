@@ -73,5 +73,5 @@
 
 <mat-dialog-actions align="end">
   <button pButton style="margin-right: 5px;" class="p-button-danger" (click)="onClose()">Close</button>
-  <button pButton class="p-button-info" (click)="onSave()">Save</button>
+  <button pButton class="p-button-info" [disabled]="dialogform.invalid" (click)="onSave()">Save</button>
 </mat-dialog-actions>

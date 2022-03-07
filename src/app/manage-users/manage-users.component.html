@@ -28,9 +28,9 @@
     <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr>
             <td *ngFor="let col of columns" [ngSwitch]="col.field">
-
+                <!-- <span *ngSwitchCase="'id'">{{rowData[col.field]}}</span> -->
                 <span *ngSwitchCase="'email'">{{rowData[col.field]}}</span>
-                <span *ngSwitchCase="'username'">{{rowData[col.field]}}</span>
+                <!-- <span *ngSwitchCase="'username'">{{rowData[col.field]}}</span> -->
                 <span *ngSwitchCase="'fullname'">{{rowData[col.field]}}</span>
                 <span *ngSwitchCase="'phonenumber'">{{rowData[col.field]}}</span>
                 <span *ngSwitchCase="'password'">{{rowData[col.field]}}</span>
@@ -41,7 +41,7 @@
                     <p-checkbox [(ngModel)]="rowData[col.field]" [disabled]="true" [binary]="true"></p-checkbox>
                 </span>
             </td>
-
+           
             <td>
                 <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-info "
                     (click)="onOpenDialog(false ,rowData)"></button>
