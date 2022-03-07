@@ -25,7 +25,7 @@ export class LoginComponent {
   userforgot = false;
   resetpassword = false;
   global: any;
-
+  hide = true;
   //when we call another object from different class
   constructor(private dataService: DataService, private router: Router, private messageService: MessageService, private formBuilder: FormBuilder) {
 
@@ -130,7 +130,14 @@ export class LoginComponent {
         this.messageService.add({ severity: 'error', summary: 'User Already Exist', detail: 'Un Successfull' })
         return;
       } else {
-        this.dataService.doRegisterUser(this.signupForm.value.email, this.signupForm.value.password);
+        this.dataService.doRegisterUser(this.signupForm.value.email,
+          this.signupForm.value.password,
+          this.signupForm.value.permission,
+          this.signupForm.value.phonenumber,
+          this.signupForm.value.fullname,
+          this.signupForm.value.username,
+          this.signupForm.value.team,
+          this.signupForm.value.roles);
         this.messageService.add({ severity: 'success', summary: 'Register', detail: 'Successfull' })
       }
       this.signupForm.reset();
@@ -160,7 +167,7 @@ export class LoginComponent {
       // if (check){this.global = check}  
       if (checkLoginUser[0].permission == true) {
 
-        this.dataService.setName(this.loginForm.value.email);
+        this.dataService.setName(checkLoginUser[0].username);
         localStorage.setItem("username", this.loginForm.value.email);
         this.router.navigate(["manageuser"]);
         this.messageService.add({ severity: 'success', summary: 'login', detail: 'Successfull' });
@@ -171,7 +178,7 @@ export class LoginComponent {
       }
     }
 
-    
+
   }
 
   //for getting password back if you forgot
@@ -197,15 +204,15 @@ export class LoginComponent {
 
   // to reset the password if the user is register
   onResetPassword() {
-    if(this.resetPasswordForm.value.newpassword !== this.resetPasswordForm.value.confirmnewpassword){
+    if (this.resetPasswordForm.value.newpassword !== this.resetPasswordForm.value.confirmnewpassword) {
       this.messageService.add({ severity: 'error', summary: 'password Doesnot Match', detail: 'Try Again' })
     }
     else if (this.resetPasswordForm.invalid) {
       this.messageService.add({ severity: 'error', summary: 'Please Fill Required Fields', detail: 'Try Again' })
-      
+
     } else {
-      
-       if (!this.dataService.registerUser.find(a => this.resetPasswordForm.value.email === a.email)) {
+
+      if (!this.dataService.registerUser.find(a => this.resetPasswordForm.value.email === a.email)) {
         this.messageService.add({ severity: 'error', summary: 'Incorrect Email', detail: 'Not Successfull' });
       }
       else {
@@ -217,6 +224,6 @@ export class LoginComponent {
         this.redirectToLoginForm();
       }
     }
-      
+
   }
 }

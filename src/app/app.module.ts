@@ -36,6 +36,7 @@ import { DialogformComponent } from './dialogform/dialogform.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FeatureComponent } from './feature/feature.component';
 import { ManageTeamComponent } from './manage-team/manage-team.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -83,7 +84,7 @@ import { ManageTeamComponent } from './manage-team/manage-team.component';
     ManageTeamComponent],
     
     bootstrap: [AppComponent],
-  providers: [ProductService, MessageService, ConfirmationService]
+  providers: [ProductService, MessageService, ConfirmationService,DatePipe]
 })
 
 export class AppModule { }

@@ -1,4 +1,4 @@
-<mat-toolbar color="stroke">
+<mat-toolbar>
   <button mat-icon-button>
     <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
   </button>
@@ -6,10 +6,28 @@
 
   <span class="example-spacer"></span>
 
-  <span class="p-button-success p-mr-2">{{global}}</span>
 
-  <button pButton pRipple label="Logout" icon="pi pi-sign-out" class=" p-mr-2" (click)="logoutConfirmation()"></button>
+  <span class="username">{{global}}</span>
+  <button mat-icon-button [matMenuTriggerFor]="menu" class="menubutton">
+    <mat-icon class="white-icon">account_circle</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" xPosition="before" class="menuBox">
+    <button mat-menu-item>
+      <mat-icon>account_circle</mat-icon>
+      <span>{{global}}</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>today</mat-icon>
+      <span> {{date}}</span>
+    </button>
+
+    <button mat-menu-item pButton pRipple label="Logout" icon="pi pi-sign-out" class=" p-button-info p-mr-2"
+      (click)="logoutConfirmation()"></button>
+
+  </mat-menu>
 </mat-toolbar>
+
+<mat-toolbar color="info">Under Progress.....</mat-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
@@ -18,8 +36,6 @@
       <a mat-list-item [routerLink]="'/manageuser'" (click)="sidenav.toggle()"> Manage User</a>
       <a mat-list-item [routerLink]="'/table'" (click)="sidenav.toggle()"> Product List </a>
       <a mat-list-item [routerLink]="'/manageteam'" (click)="sidenav.toggle()"> Manage Team </a>
-
-      <a mat-list-item (click)="sidenav.toggle()" mat-list-item>Close</a>
 
     </mat-nav-list>
   </mat-sidenav>

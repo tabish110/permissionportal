@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login/login.component';
 import { MaterialModule } from 'src/material.module';
-import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
@@ -13,16 +13,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     LoginComponent
-    
+
   ],
   imports: [
     CommonModule,
     LoginRoutingModule,
-    MaterialModule ,
+    MaterialModule,
     FlexLayoutModule,
-    
-    
-    FormsModule ,
+    FormsModule,
     ReactiveFormsModule,
   ]
 })
