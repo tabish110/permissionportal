@@ -61,7 +61,10 @@ export class ManageUsersComponent implements OnInit {
     dialogConfig.data = data;
     this.dialog.open(DialogformComponent, { data: { source: data, isEdit: isEdit } });
   }
+  
+  
 }
+
 
 
 

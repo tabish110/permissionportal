@@ -37,6 +37,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FeatureComponent } from './feature/feature.component';
 import { ManageTeamComponent } from './manage-team/manage-team.component';
 import { DatePipe } from '@angular/common';
+import { ManagteamDialogComponent } from './managteam-dialog/managteam-dialog.component';
 
 
 
@@ -81,7 +82,8 @@ import { DatePipe } from '@angular/common';
     ManageUsersComponent, 
     DialogformComponent,
     FeatureComponent,
-    ManageTeamComponent],
+    ManageTeamComponent,
+    ManagteamDialogComponent],
     
     bootstrap: [AppComponent],
   providers: [ProductService, MessageService, ConfirmationService,DatePipe]
