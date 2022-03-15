@@ -14,7 +14,7 @@ export class DialogformComponent implements OnInit {
 
   dialogform: any;
   roles: any = ['Developer', 'Testing', 'Documentation'];
-  team:Array<any> = this.dataService.teams.map((a)=>a.teamname);
+  team: Array<any> = this.dataService.teams.map((a) => a.teamname);
   hide = true;
   hide2 = true;
 
@@ -40,9 +40,9 @@ export class DialogformComponent implements OnInit {
       password: [this.data.source.password, Validators.required],
       confirmpassword: [this.data.source.password, Validators.required],
       permission: [this.data.source.permission],
-      username: [this.data.source.username, Validators.required],
+      username: [this.data.source.username, [Validators.required, Validators.pattern('^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$')]],
       fullname: [this.data.source.username, Validators.required],
-    phonenumber: [this.data.source.phonenumber,  ],
+      phonenumber: [this.data.source.phonenumber,[Validators.required,Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[/0-9]*$')]],
       team: [this.data.source.team],
       roles: [this.data.source.roles],
     }, {
@@ -90,13 +90,13 @@ export class DialogformComponent implements OnInit {
 
         }
         this.dialogRef.close();
-        
+
       } else { this.messageService.add({ severity: 'error', summary: 'Fill all the field' }) }
     } else if (this.data.isEdit == false) {
-      
+
       let findindex = this.dataService.registerUser.findIndex((item) => item.id == this.data.source.id);
-      
-      
+
+
 
       this.dataService.registerUser[findindex].email = this.dialogform.value.email;
       this.dataService.registerUser[findindex].password = this.dialogform.value.password;
@@ -106,41 +106,42 @@ export class DialogformComponent implements OnInit {
       this.dataService.registerUser[findindex].phonenumber = this.dialogform.value.phonenumber;
       this.dataService.registerUser[findindex].team = this.dialogform.value.team;
       this.dataService.registerUser[findindex].roles = this.dialogform.value.roles;
-      
 
-    for(let i=0 ; i< this.data.source.team.length; i++){
-      console.log(i);
-      let match = 0;
-      let match2 = 0;
-      for(let j=0 ; j< this.dataService.teams.length; j++){
-        console.log(j);
-        for(let k=0 ; k< this.dataService.teams[j].teamuser.length; k++){
-          let index = this.dataService.teams.findIndex((item) => this.dataService.teams[j].teamuser == this.data.source.username);
-          if(index < 0){
-            if(match2 > match){
-              match = match2;
-            }
 
-            let selectedteam = this.data.source.team.findIndex(() =>  this.data.source.team[match] == this.dataService.teams[j].teamname);
-            if(selectedteam >= 0){
-              this.dataService.teams[j].teamuser.push(this.data.source.username)
-              return;
-            }else{
-              match ++;
-            }
-          }else{
-              match2 ++;
-          }
-        }  
-      }
-      
-    }
+      // for(let i=0 ; i< this.data.source.team.length; i++){
+      //   console.log(i);
+      //   let match = 0;
+      //   let match2 = 0;
+      //   for(let j=0 ; j< this.dataService.teams.length; j++){
+      //     console.log(j);
+      //     for(let k=0 ; k< this.dataService.teams[j].teamuser.length; k++){
+      //       let index = this.dataService.teams.findIndex((item) => this.dataService.teams[j].teamuser == this.data.source.username);
+      //       if(index < 0){
+      //         if(match2 > match){
+      //           match = match2;
+      //         }
+
+      //         let selectedteam = this.data.source.team.findIndex(() =>  this.data.source.team[match] == this.dataService.teams[j].teamname);
+      //         if(selectedteam >= 0){
+      //           this.dataService.teams[j].teamuser.push(this.data.source.username)
+      //           return;
+      //         }else{
+      //           match ++;
+      //         }
+      //       }else{
+      //           match2 ++;
+      //       }
+      //     }  
+      //   }
+
+      // }
       // let index = this.dataService.teams.findIndex((item) => item.teamuser !== this.data.source.username);
       // this.dataService.teams[index].teamuser.push(this.dialogform.value.username);
       this.messageService.add({ severity: 'success', summary: 'Record Updated', });
-      this.dialogRef.close();}
-    
-    
+      this.dialogRef.close();
+    }
+
+
   }
 
   onClose() {

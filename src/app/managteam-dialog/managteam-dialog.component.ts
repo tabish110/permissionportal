@@ -33,7 +33,7 @@ export class ManagteamDialogComponent implements OnInit {
     private confirmationService: ConfirmationService,
     // inject help us to get data from different class
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<DialogformComponent>,) { }
+    private dialogRef: MatDialogRef<ManagteamDialogComponent>,) { }
 
   ngOnInit(): void {
 
@@ -51,38 +51,37 @@ export class ManagteamDialogComponent implements OnInit {
   }
 
   onadd() {
-    if(this.data.isEdit == true){
+    if (this.data.isEdit == true) {
       this.dataService.pushdata(this.manageform.value.teamname, this.manageform.value.user)
-      
-      
-      for(let i=0 ; i< this.data.source[this.data.source.length - 1].teamuser.length; i++){
+
+
+      for (let i = 0; i < this.data.source[this.data.source.length - 1].teamuser.length; i++) {
         let index = this.dataService.registerUser.findIndex((item) => item.username == this.data.source[this.data.source.length - 1].teamuser[i]);
-        if(!this.dataService.registerUser[index].team){
+        if (!this.dataService.registerUser[index].team) {
           this.dataService.registerUser[index].team = []
         }
-      
+
         this.dataService.registerUser[index].team.push(this.manageform.value.teamname);
-          // this.dataService.registerUser[index].team = this.dataService.registerUser.team.push([this.manageform.value.teamname]);
+        // this.dataService.registerUser[index].team = this.dataService.registerUser.team.push([this.manageform.value.teamname]);
       }
-   
-      
-      
+
       this.dialogRef.close();
-    }else if (this.data.isEdit == false){
+    } else if (this.data.isEdit == false) {
       let findindex = this.dataService.teams.findIndex((item) => item.teamname == this.data.source.teamname);
       let index = this.dataService.registerUser.findIndex((item) => item.username == this.data.source.teamuser);
       this.dataService.teams[findindex].teamname = this.manageform.value.teamname;
-      this.dataService.registerUser[index].team= this.manageform.value.teamname;
+      this.dataService.registerUser[index].team = this.manageform.value.teamname;
       this.dataService.teams[findindex].teamuser = this.manageform.value.user;
       this.messageService.add({ severity: 'success', summary: 'Record Updated', });
-      this.dialogRef.close();}
-    }
-    
-    onClose() {
       this.dialogRef.close();
     }
-  
   }
-  
 
-  
+  onClose() {
+    this.dialogRef.close();
+  }
+
+}
+
+
+

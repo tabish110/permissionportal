@@ -1,14 +1,14 @@
 <p-toolbar>
-    <input pInputText type="text" #input (input)="dt.filterGlobal(input.value,'contains')" placeholder="search..." />
+    <input pInputText type="text" #input (input)="grid.filterGlobal(input.value,'contains')" placeholder="search..." />
     <span class="example-spacer"></span>
     <button pButton pRipple label="New" icon="pi pi-plus" class=" p-button-info "
         (click)="onOpenDialog(true,this.dataService.registerUser)"></button>
 </p-toolbar>
 
-<p-table #dt [columns]="permissionCols" class="ds-permission" [value]="this.dataService.registerUser"
-    [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,20,50,100]" [showCurrentPageReport]="true"
-    [responsive]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [filterDelay]="0" selectionMode="multiple" dataKey="key_id">
+<p-table #grid [columns]="permissionCols" class="ds-permission" [value]="this.dataService.customer" [paginator]="true"
+    [rows]="10" [rowsPerPageOptions]="[10,20,50,100]" [showCurrentPageReport]="true" [responsive]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+    selectionMode="multiple" dataKey="key_id">
 
 
     <ng-template pTemplate="header" let-columns>
@@ -22,7 +22,6 @@
             </th>
         </tr>
 
-
     </ng-template>
 
     <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -30,16 +29,9 @@
             <td *ngFor="let col of columns" [ngSwitch]="col.field">
                 <span *ngSwitchCase="'id'">{{rowData[col.field]}}</span>
                 <span *ngSwitchCase="'email'">{{rowData[col.field]}}</span>
-                <span *ngSwitchCase="'username'">{{rowData[col.field]}}</span>
-                <span *ngSwitchCase="'fullname'">{{rowData[col.field]}}</span>
+                <span *ngSwitchCase="'name'">{{rowData[col.field]}}</span>
                 <span *ngSwitchCase="'phonenumber'">{{rowData[col.field]}}</span>
-                <span *ngSwitchCase="'password'">{{rowData[col.field]}}</span>
-                <span *ngSwitchCase="'team'">{{ (rowData[col.field]) }}</span>
-                <span *ngSwitchCase="'roles'">{{ (rowData[col.field]) }}</span>
-                <span *ngSwitchCase="'permission'">
 
-                    <p-checkbox [(ngModel)]="rowData[col.field]" [disabled]="true" [binary]="true"></p-checkbox>
-                </span>
             </td>
 
             <td>

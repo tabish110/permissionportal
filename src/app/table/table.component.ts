@@ -3,6 +3,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { Product } from './product';
 import { ProductService } from './productservice';
 
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -15,13 +16,13 @@ export class TableComponent implements OnInit {
   product!: Product;
   selectedProducts: Product[] = [];
   submitted: boolean = false;
-
+   
   constructor(private productService: ProductService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
-
 
 
   ngOnInit(): void {
     this.productService.getProducts().then(data => this.products = data);
+    console.log(this.products)
 
   }
 
@@ -69,6 +70,9 @@ export class TableComponent implements OnInit {
         this.product.id = this.createId();
         this.product.image = 'product-placeholder.svg';
         this.products.push(this.product);
+         JSON.stringify(this.products);
+        
+       
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
       }
       this.products = [...this.products];

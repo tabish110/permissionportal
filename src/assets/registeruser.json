@@ -1,0 +1,44 @@
+{
+    "data": [
+        {
+            "id": "0",
+            "name":"admin",
+            "email": "admin@gmail.com",
+            "password": "admin",
+            "permission": true,
+            "fullname": "Owner",
+            "username": "admin",
+            "phonenumber": "0321344500"
+        },
+        {
+            "id": "1",
+            "name":"moiz",
+            "email": "moiz@gmail.com",
+            "password": "moiz",
+            "permission": false,
+            "fullname": "moiz",
+            "username": "moiz",
+            "phonenumber": "0321344500"
+        },
+        {
+            "id": "2",
+            "name":"hasan",
+            "email": "hasan@gmail.com",
+            "password": "hasan",
+            "permission": false,
+            "fullname": "hasan",
+            "username": "hasan",
+            "phonenumber": "032134450"
+        },
+        {
+            "id": "3",
+            "name":"ali",
+            "email": "ali@gmail.com",
+            "password": "ali",
+            "permission": false,
+            "fullname": "ali",
+            "username": "ali",
+            "phonenumber": "0321344500"
+        }
+    ]
+}

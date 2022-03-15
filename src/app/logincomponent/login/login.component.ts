@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DataService } from 'src/app/shared/data.service';
 
@@ -167,9 +167,13 @@ export class LoginComponent {
       // if (check){this.global = check}  
       if (checkLoginUser[0].permission == true) {
 
-        this.dataService.setName(checkLoginUser[0].username);
-        localStorage.setItem("username", this.loginForm.value.email);
-        this.router.navigate(["manageuser"]);
+        // this.dataService.setName(checkLoginUser[0].username);
+        // localStorage.setItem("email", this.loginForm.value.email);
+        localStorage.setItem("permission",checkLoginUser[0].permission);
+        localStorage.setItem("username",checkLoginUser[0].username);
+        localStorage.setItem("id",checkLoginUser[0].id)
+        
+        this.router.navigate(['manageuser']);
         this.messageService.add({ severity: 'success', summary: 'login', detail: 'Successfull' });
 
       } else {

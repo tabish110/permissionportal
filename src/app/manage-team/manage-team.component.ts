@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MessageService, ConfirmationService } from 'primeng/api';
-import { DialogformComponent } from '../dialogform/dialogform.component';
 import { ManagteamDialogComponent } from '../managteam-dialog/managteam-dialog.component';
 import { DataService } from '../shared/data.service';
 

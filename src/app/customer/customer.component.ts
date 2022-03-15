@@ -1,41 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { DialogformComponent } from '../dialogform/dialogform.component';
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { CustomerDialogComponent } from '../customer-dialog/customer-dialog.component';
 import { DataService } from '../shared/data.service';
-import { User } from '../shared/user';
+
 
 @Component({
-  selector: 'app-manage-users',
-  templateUrl: './manage-users.component.html',
-  styleUrls: ['./manage-users.component.scss']
+  selector: 'app-customer',
+  templateUrl: './customer.component.html',
+  styleUrls: ['./customer.component.scss']
 })
-export class ManageUsersComponent implements OnInit {
-
-  users: User[] = []
-  user!: User;
+export class CustomerComponent implements OnInit {
 
   permissionCols = [
-    // { field: 'id', header: 'ID' },
-    { field: 'fullname', header: 'Name' },
-    // { field: 'username', header: 'User Name' },
+    { field: 'id', header: 'ID' },
+    { field: 'name', header: 'Name' },
+
     { field: 'phonenumber', header: 'Phone Number' },
     { field: 'email', header: 'Email' },
-    { field: 'password', header: 'Password' },
-    { field: 'permission', header: 'Permission' },
-    { field: 'team', header: 'Team' },
-    { field: 'roles', header: 'Roles' },
-  ];
 
+  ];
 
   constructor(public dataService: DataService, private dialog: MatDialog, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
-    this.dataService.getUser().subscribe((res: any) => {
-      this.users = res.user;
-     
-    });
-
 
   }
 
@@ -67,12 +55,9 @@ export class ManageUsersComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = data;
-    this.dialog.open(DialogformComponent, { data: { source: data, isEdit: isEdit } });
+    this.dialog.open(CustomerDialogComponent, { data: { source: data, isEdit: isEdit } });
   }
 
 
 }
-
-
-
 
