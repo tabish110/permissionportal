@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Customer Details</h2>
+
+<mat-dialog-content [formGroup]="customerform" class="class">
+    <div>
+        <mat-form-field>
+            <input matInput placeholder=" Name" type="text" formControlName="name" />
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Email" type="email" formControlName="email" />
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="Phone Number" type="text" formControlName="phonenumber" />
+        </mat-form-field>
+
+    </div>
+
+
+
+
+
+    <mat-dialog-actions align="end">
+        <button pButton style="margin-right: 5px;" class="p-button-danger" (click)="onClose()">Close</button>
+        <button pButton class="p-button-info" [disabled]="customerform.invalid" (click)="onSave()">Save</button>
+    </mat-dialog-actions>

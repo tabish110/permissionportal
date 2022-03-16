@@ -25,17 +25,17 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-
-import { TableComponent } from './table/table.component';
 import { MaterialModule } from 'src/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TopbarComponent } from './topbar/topbar.component';
-import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { DialogformComponent } from './dialogform/dialogform.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FeatureComponent } from './feature/feature.component';
-import { ManageTeamComponent } from './manage-team/manage-team.component';
+import { DatePipe } from '@angular/common';
+import { ManagteamDialogComponent } from './managteam-dialog/managteam-dialog.component';
+import { AuthGuard } from './auth.guard';
+import { CustomerDialogComponent } from './customer-dialog/customer-dialog.component';
 
 
 
@@ -74,16 +74,15 @@ import { ManageTeamComponent } from './manage-team/manage-team.component';
   ],
   exports: [MaterialModule, FlexLayoutModule],
   declarations: [
-    AppComponent,  
-    TableComponent, 
-    TopbarComponent, 
-    ManageUsersComponent, 
+    AppComponent,   
+    TopbarComponent,  
     DialogformComponent,
     FeatureComponent,
-    ManageTeamComponent],
+    ManagteamDialogComponent,
+    CustomerDialogComponent],
     
     bootstrap: [AppComponent],
-  providers: [ProductService, MessageService, ConfirmationService]
+  providers: [ProductService, MessageService, ConfirmationService,DatePipe,AuthGuard]
 })
 
 export class AppModule { }

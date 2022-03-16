@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Manage Team</h2>
+<mat-dialog-content [formGroup]="manageform">
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="Name" formControlName="teamname" type="text">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+            <textarea matInput formControlName="discription" placeholder="Discription"></textarea>
+        </mat-form-field>
+    </div>
+
+    <mat-form-field>
+        <mat-label>Users</mat-label>
+        <mat-select multiple formControlName="user">
+            <mat-option *ngFor="let user of users" [value]="user">
+                {{user}}
+            </mat-option>
+        </mat-select>
+
+    </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button pButton style="margin-right: 5px;" class="p-button-danger" (click)="onClose()">Close</button>
+    <button pButton class="p-button-info" [disabled]="manageform.invalid" (click)="onadd()">Save</button>
+</mat-dialog-actions>

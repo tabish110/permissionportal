@@ -1,6 +1,6 @@
 .p-button, .p-button-success {
-  margin: 0px 5px 0 0;
-  
+    margin: 0px 5px 0 0;
+    
 }
 
 .fixed{
@@ -8,11 +8,11 @@ width: 8rem;
 }
 :host ::ng-deep {
 .p-paginator {
-  .p-paginator-current {
-      margin-left: auto !important;
-  }
+    .p-paginator-current {
+        margin-left: auto !important;
+    }
 }
-
+ 
 }  
 
 .example-spacer {

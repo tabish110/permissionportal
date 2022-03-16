@@ -1,13 +1,28 @@
 .example-spacer {
-    flex: 1 1 auto;
-  }
-
-  mat-nav-list{
-    padding: 25px;
-    width: 18rem;
-  }
+  flex: 1 1 auto;
+}
+.menubutton {
+  background-color: #0288d1;
+}
+.white-icon {
+  color: white;
+}
+mat-nav-list {
   
-    
-    mat-sidenav-container.mat-drawer-container.mat-sidenav-container.mat-drawer-transition.mat-drawer-container-has-open {
-      height: 100%;
-  }  
+  width: 15rem;
+}
+
+mat-sidenav-container.mat-drawer-container.mat-sidenav-container.mat-drawer-transition.mat-drawer-container-has-open {
+  height: 100%;
+}
+mat-menu,
+.menuBox {
+  width: 8;
+}
+.username{
+  padding: inherit;
+  text-transform: uppercase;
+}
+.mat-list-base{
+  padding: 0px;
+}

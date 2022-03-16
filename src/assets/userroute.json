@@ -1,0 +1,22 @@
+{
+    "user": [
+        {
+            "email":"admin@gmail.com",
+            "screenname": "admin",
+            "screen id": "0",
+            "route": ["/manageuser", "/manageteam" ,"/customer" ,"/table"] 
+        },
+        {
+            "email":"moiz@gmail.com",
+            "screenname": "user1",
+            "screenid": "1",
+            "route": ["/table","/customer"]
+        },
+        {
+            "email":"ali@gmail.com",
+            "screen name": "user2",
+            "screen id": "2",
+            "route": ["/table","/customer"]
+        }
+    ]
+}

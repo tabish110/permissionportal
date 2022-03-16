@@ -1,10 +1,8 @@
 .p-button, .p-button-success {
         margin: 0px 5px 0 0;
-        .p-button, .p-button-success {
-            background-color: #4d80cc;
-        }
+        
     }
-
+    
 .fixed{
     width: 8rem;
 }
@@ -15,4 +13,12 @@
         }
     }
      
-}   
+}  
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+.p-sortable-column-icon .pi .pi-fw .pi-sort-alt{
+    font-size: smaller !important;
+}
