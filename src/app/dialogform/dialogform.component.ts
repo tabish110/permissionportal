@@ -15,6 +15,11 @@ export class DialogformComponent implements OnInit {
   dialogform: any;
   roles: any = ['Developer', 'Testing', 'Documentation'];
   team: Array<any> = this.dataService.teams.map((a) => a.teamname);
+  // route: Array<any> = this.dataService.registerUser.map((a) => a.route);
+  route: Array<any> = [{ id: 0, name: 'manage user', icon: 'supervisor_account', path: 'manageuser' },
+  { id: 1, name: 'manage team', icon: 'supervised_user_circle', path: 'manageteam' },
+  { id: 2, name: 'customer', icon: 'face', path: 'customer' },
+  { id: 3, name: 'product lsit', icon: 'add_shopping_cart', path: 'table' }];
   hide = true;
   hide2 = true;
 
@@ -28,9 +33,15 @@ export class DialogformComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.dialogform = this.updateFromBuilder();
-
+    if (this.data && this.data?.source?.route && this.data?.source?.route.length > 0) {
+      this.route = this.data?.source?.route;
+    } else {
+      this.route = [{ id: 0, name: 'manage user', icon: 'supervisor_account', path: 'manageuser' },
+      { id: 1, name: 'manage team', icon: 'supervised_user_circle', path: 'manageteam' },
+      { id: 2, name: 'customer', icon: 'face', path: 'customer' },
+      { id: 3, name: 'product lsit', icon: 'add_shopping_cart', path: 'table' }];
+    }
   }
 
   // this the dialog form fields 
@@ -42,9 +53,10 @@ export class DialogformComponent implements OnInit {
       permission: [this.data.source.permission],
       username: [this.data.source.username, [Validators.required, Validators.pattern('^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$')]],
       fullname: [this.data.source.username, Validators.required],
-      phonenumber: [this.data.source.phonenumber,[Validators.required,Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[/0-9]*$')]],
+      phonenumber: [this.data.source.phonenumber, [Validators.required, Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[/0-9]*$')]],
       team: [this.data.source.team],
       roles: [this.data.source.roles],
+      route: [this.data.source.route]
     }, {
       validator: this.confirmedPasswordValidator('password', 'confirmpassword')
 
@@ -85,7 +97,8 @@ export class DialogformComponent implements OnInit {
             this.dialogform.value.username,
             this.dialogform.value.phonenumber,
             this.dialogform.value.team,
-            this.dialogform.value.roles);
+            this.dialogform.value.roles,
+            this.dialogform.value.route);
           this.messageService.add({ severity: 'success', summary: 'NewUser Created', detail: 'Successfull' })
 
         }
@@ -106,6 +119,7 @@ export class DialogformComponent implements OnInit {
       this.dataService.registerUser[findindex].phonenumber = this.dialogform.value.phonenumber;
       this.dataService.registerUser[findindex].team = this.dialogform.value.team;
       this.dataService.registerUser[findindex].roles = this.dialogform.value.roles;
+      this.dataService.registerUser[findindex].route = this.dialogform.value.route;
 
 
       // for(let i=0 ; i< this.data.source.team.length; i++){

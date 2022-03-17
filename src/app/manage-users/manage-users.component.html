@@ -5,10 +5,10 @@
         (click)="onOpenDialog(true,this.dataService.registerUser)"></button>
 </p-toolbar>
 
-<p-table #dt [columns]="permissionCols" class="ds-permission" [value]="this.dataService.registerUser"
-    [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,20,50,100]" [showCurrentPageReport]="true"
-    [responsive]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [filterDelay]="0" selectionMode="multiple" dataKey="key_id">
+<p-table #dt [columns]="permissionCols" class="ds-permission" [value]="this.dataService.registerUser" [paginator]="true"
+    [rows]="10" [rowsPerPageOptions]="[10,20,50,100]" [showCurrentPageReport]="true" [responsive]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+    selectionMode="multiple" dataKey="key_id">
 
 
     <ng-template pTemplate="header" let-columns>
@@ -36,6 +36,7 @@
                 <span *ngSwitchCase="'password'">{{rowData[col.field]}}</span>
                 <span *ngSwitchCase="'team'">{{ (rowData[col.field]) }}</span>
                 <span *ngSwitchCase="'roles'">{{ (rowData[col.field]) }}</span>
+                <span *ngSwitchCase="'route'">{{ (rowData[col.field]) }}</span>
                 <span *ngSwitchCase="'permission'">
 
                     <p-checkbox [(ngModel)]="rowData[col.field]" [disabled]="true" [binary]="true"></p-checkbox>

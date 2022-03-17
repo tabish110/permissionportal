@@ -26,6 +26,7 @@ export class LoginComponent {
   resetpassword = false;
   global: any;
   hide = true;
+  path = this.dataService.getName()
   //when we call another object from different class
   constructor(private dataService: DataService, private router: Router, private messageService: MessageService, private formBuilder: FormBuilder) {
 
@@ -137,7 +138,8 @@ export class LoginComponent {
           this.signupForm.value.fullname,
           this.signupForm.value.username,
           this.signupForm.value.team,
-          this.signupForm.value.roles);
+          this.signupForm.value.roles,
+          this.signupForm.value.route);
         this.messageService.add({ severity: 'success', summary: 'Register', detail: 'Successfull' })
       }
       this.signupForm.reset();
@@ -169,11 +171,10 @@ export class LoginComponent {
 
         // this.dataService.setName(checkLoginUser[0].username);
         // localStorage.setItem("email", this.loginForm.value.email);
-        localStorage.setItem("permission",checkLoginUser[0].permission);
-        localStorage.setItem("username",checkLoginUser[0].username);
-        localStorage.setItem("id",checkLoginUser[0].id)
-        
-        this.router.navigate(['manageuser']);
+        localStorage.setItem("permission", checkLoginUser[0].permission);
+        localStorage.setItem("username", checkLoginUser[0].username);
+        localStorage.setItem("id", checkLoginUser[0].id)
+        this.router.navigate([checkLoginUser[0].route[0].path]);
         this.messageService.add({ severity: 'success', summary: 'login', detail: 'Successfull' });
 
       } else {

@@ -7,7 +7,6 @@ import { User } from './user';
   providedIn: 'root'
 })
 export class DataService {
-
   registerUser: Array<any> = [
     {
       id: '0',
@@ -18,10 +17,10 @@ export class DataService {
       username: 'admin',
       phonenumber: '032134450',
       route: [
-        { id: 0, name: 'mangeuser', path: '/manageuser' },
-        { id: 1, name: 'manageteam', path: '/manageteam' },
-        { id: 2, name: 'customer', path: '/customer' },
-        { id: 3, name: 'productlsit', path: '/table' }]
+        { id: 0, name: 'manage user', icon: 'supervisor_account', path: 'manageuser' },
+        { id: 1, name: 'manage team', icon: 'supervised_user_circle', path: 'manageteam' },
+        { id: 2, name: 'customer', icon: 'face', path: 'customer' },
+        { id: 3, name: 'product lsit', icon: 'add_shopping_cart', path: 'table' }]
     },
     {
       id: '1',
@@ -29,8 +28,8 @@ export class DataService {
       password: 'moiz', username: 'moiz',
       permission: true,
       route: [
-        { id: 0, name: 'customer', path: '/customer' },
-        { id: 1, name: 'productlsit', path: '/table' }]
+        { id: 0, name: 'customer', icon: 'face', path: 'customer' },
+        { id: 1, name: 'productlsit', icon: 'add_shopping_cart', path: 'table' }]
     },
     {
       id: '2',
@@ -38,8 +37,8 @@ export class DataService {
       password: 'ali', username: 'ali',
       permission: false,
       route: [
-        { id: 0, name: 'customer', path: '/customer' },
-        { id: 1, name: 'productlsit', path: '/table' }]
+        { id: 0, name: 'customer', icon: 'face', path: 'customer' },
+        { id: 1, name: 'productlsit', icon: 'add_shopping_cart', path: 'table' }]
     },
     {
       id: '3',
@@ -48,8 +47,8 @@ export class DataService {
       username: 'hasan',
       permission: false,
       route: [
-        { id: 0, name: 'customer', path: '/customer' },
-        { id: 1, name: 'productlsit', path: '/table' }]
+        { id: 0, name: 'customer', icon: 'face', path: 'customer' },
+        { id: 1, name: 'productlsit', path: 'table' }]
     },
 
 
@@ -62,12 +61,12 @@ export class DataService {
     { id: 3, name: 'taimoor', email: 'taimoor@gmail.com', phonenumber: '0321344500' },
   ]
   teams: any[] = [];
-  name: any;
+  name: any[] = [];
 
 
   constructor(private http: HttpClient) { }
 
-  
+
   getUsers() {
     return this.http.get('assets/registeruser.json')
   }
@@ -96,8 +95,8 @@ export class DataService {
   }
 
   // to save a user
-  doRegisterUser(email: string, password: string, permission: boolean, fullname: '', username: string, phonenumber: '', team: any, roles: '') {
-    this.registerUser.push({ id: this.generateId(), email, password, permission, fullname, username, phonenumber, team, roles })
+  doRegisterUser(email: string, password: string, permission: boolean, fullname: '', username: string, phonenumber: '', team: any, roles: '', route: any) {
+    this.registerUser.push({ id: this.generateId(), email, password, permission, fullname, username, phonenumber, team, roles, route })
     console.log(this.registerUser)
   }
   pushdata(teamname: string, teamuser: string) {
@@ -105,7 +104,7 @@ export class DataService {
     console.log(this.teams)
   }
 
-  setName(email: string) {
+  setName(email: Array<any>) {
     this.name = (email)
 
   }
