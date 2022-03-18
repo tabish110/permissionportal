@@ -34,7 +34,7 @@ export class CustomerDialogComponent implements OnInit {
     return this.formBuilder.group({
       email: [this.data.source.email, [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       name: [this.data.source.name, Validators.required],
-      phonenumber: [this.data.source.phonenumber,],
+      phonenumber: [this.data.source.phonenumber, [Validators.required, Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[/0-9]*$')]],
 
     });
   }

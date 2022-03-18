@@ -56,7 +56,7 @@ export class DialogformComponent implements OnInit {
       phonenumber: [this.data.source.phonenumber, [Validators.required, Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[/0-9]*$')]],
       team: [this.data.source.team],
       roles: [this.data.source.roles],
-      route: [this.data.source.route]
+      route: [this.data.source.route, [Validators.required]]
     }, {
       validator: this.confirmedPasswordValidator('password', 'confirmpassword')
 
