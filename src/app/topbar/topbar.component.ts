@@ -16,7 +16,7 @@ export class TopbarComponent implements OnInit {
   global2 = localStorage.getItem('username')
   name = 'Angular ' + VERSION.major;
   date: any;
-  allMenues: any;
+  allMenues: any[] = [];
 
   constructor(private dataService: DataService,
     private confirmationService: ConfirmationService,
@@ -26,11 +26,11 @@ export class TopbarComponent implements OnInit {
     let currentDateTime = this.datepipe.transform((new Date), 'MM/dd/yyyy h:mm:ss');
     this.date = currentDateTime;
   }
-  ngOnInit(): void { 
+  ngOnInit(): void {
     const userId = localStorage.getItem('id');
     const userObj = this.dataService.registerUser.find(item => item?.id === userId)
     this.allMenues = (userObj?.route && userObj?.route?.length > 0) ? userObj?.route : [];
-    this.dataService.setName(this.allMenues)
+    this.dataService.setName(this.allMenues);
   }
 
   // this will ask a confirmation when you user get logout

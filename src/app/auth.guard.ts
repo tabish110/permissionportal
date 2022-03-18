@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, CanActivate, Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { DataService } from './shared/data.service';
 
 
@@ -7,21 +7,36 @@ import { DataService } from './shared/data.service';
 export class AuthGuard implements CanActivate {
 
 
-  constructor(private routes: Router , private dataService: DataService) { }
-  canActivate(): boolean {
+  constructor(private routes: Router, private dataService: DataService) { }
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
     const token = localStorage.getItem('permission')
     const saveId = localStorage.getItem('id')
+    
+    const currentpath = route.url[0].path
     const paths = this.dataService.registerUser.find(item => item?.id === saveId)
-    if (!token && paths?.route !== ActivatedRoute) {
+    
+    const fin = paths?.route
+    
+    const test = fin.findIndex((item:any) => item.path == currentpath)
+    
+    if (!token) {
+
       this.routes.navigate(['/']);
+
       return false;
     }
 
     else {
-      return true;
+      if ( test < 0) {
+        this.routes.navigate(['/']);
+        return false
+      }
+      else {
+        return true;
+      }
+
     }
 
   }
-
 }

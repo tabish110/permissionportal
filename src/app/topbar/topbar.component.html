@@ -36,7 +36,7 @@
       <div class="logo"></div>
       <ng-container *ngFor="let menu of allMenues">
         <a mat-list-item [routerLink]="menu?.path" (click)="sidenav.toggle()">
-          <mat-icon matPrefix>supervisor_account</mat-icon> <span class="username">{{menu?.name}}</span>
+          <mat-icon matPrefix>{{menu?.icon}}</mat-icon> <span class="username">{{menu?.name}}</span>
         </a>
         <!-- <a mat-list-item [routerLink]="'/manageuser'" (click)="sidenav.toggle()">
           <mat-icon matPrefix>supervisor_account</mat-icon> <span class="username">Manage User</span>

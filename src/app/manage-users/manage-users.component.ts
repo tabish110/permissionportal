@@ -25,6 +25,7 @@ export class ManageUsersComponent implements OnInit {
     { field: 'permission', header: 'Permission' },
     { field: 'team', header: 'Team' },
     { field: 'roles', header: 'Roles' },
+    // { field:'route' , header: 'Route' }
   ];
 
 
@@ -33,7 +34,7 @@ export class ManageUsersComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.getUser().subscribe((res: any) => {
       this.users = res.user;
-     
+
     });
 
 
