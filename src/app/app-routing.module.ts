@@ -35,11 +35,15 @@ const routes: Routes = [
       }
     ]
   },
-
+  {
+    path: 'messagescreen',
+    loadChildren: () => import('./messagescreen/messagescreen.module').then(m => m.MessagescreenModule)
+  },
   {
     path: '**',
     loadChildren: () => import('./logincomponent/login.module').then(m => m.LoginModule)
-  }
+  },
+
 ];
 
 

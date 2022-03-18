@@ -15,7 +15,6 @@ export class CustomerComponent implements OnInit {
   permissionCols = [
     { field: 'id', header: 'ID' },
     { field: 'name', header: 'Name' },
-
     { field: 'phonenumber', header: 'Phone Number' },
     { field: 'email', header: 'Email' },
 
@@ -34,16 +33,12 @@ export class CustomerComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        if (data.id > 0) {
+        const index = this.dataService.customer.findIndex(val => val.id === data.id)
+        this.dataService.customer.splice(index, 1)
+        this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User Deleted', life: 3000 });
+        // this.dataService.registerUser = this.dataService.registerUser.filter(val => val.id !== data.id);
+        // this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User Deleted', life: 3000 });
 
-          const index = this.dataService.registerUser.findIndex(val => val.id === data.id)
-          this.dataService.registerUser.splice(index, 1)
-          this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User Deleted', life: 3000 });
-        } else {
-          this.messageService.add({ severity: 'warn', summary: 'Admin Cannot Be Deleted', });
-          // this.dataService.registerUser = this.dataService.registerUser.filter(val => val.id !== data.id);
-          // this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User Deleted', life: 3000 });
-        }
       }
     });
 
@@ -57,7 +52,5 @@ export class CustomerComponent implements OnInit {
     dialogConfig.data = data;
     this.dialog.open(CustomerDialogComponent, { data: { source: data, isEdit: isEdit } });
   }
-
-
 }
 

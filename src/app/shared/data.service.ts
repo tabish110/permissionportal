@@ -25,7 +25,9 @@ export class DataService {
     {
       id: '1',
       email: 'moiz@gmail.com',
-      password: 'moiz', username: 'moiz',
+      password: 'moiz', 
+      username: 'moiz',
+      phonenumber: '032134450',
       permission: true,
       route: [
         { id: 0, name: 'customer', icon: 'face', path: 'customer' },
@@ -34,7 +36,9 @@ export class DataService {
     {
       id: '2',
       email: 'ali@gmail.com',
-      password: 'ali', username: 'ali',
+      password: 'ali', 
+      username: 'ali',
+      phonenumber: '032134450',
       permission: false,
       route: [
         { id: 0, name: 'customer', icon: 'face', path: 'customer' },
@@ -45,6 +49,7 @@ export class DataService {
       email: 'hasan@gmail.com',
       password: 'hasan',
       username: 'hasan',
+      phonenumber: '032134450',
       permission: false,
       route: [
         { id: 0, name: 'customer', icon: 'face', path: 'customer' },

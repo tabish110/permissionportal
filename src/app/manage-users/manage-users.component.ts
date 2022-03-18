@@ -42,6 +42,7 @@ export class ManageUsersComponent implements OnInit {
 
   // when the specific user is deleted in a row 
   onRemove(data: any) {
+
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete ' + data.email + '?',
       header: 'Confirm',
