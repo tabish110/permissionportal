@@ -1,0 +1,26 @@
+<p-confirmDialog [style]="{width:'450px'}"></p-confirmDialog>
+
+
+<p-toolbar>
+
+    <button pButton pRipple label="New" icon="pi pi-plus" class=" p-button-info "
+        (click)="onOpenDialog(true,Posts)"></button>
+</p-toolbar>
+<div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div fxFlex="25%" *ngFor="let post of Posts">
+
+            <mat-card id="dt" class="mat-elevation-z4">
+                <mat-card-title>{{post.id}}</mat-card-title>
+                <mat-card-subtitle>{{post.title}}</mat-card-subtitle>
+                <mat-card-content> {{post.body}}</mat-card-content>
+                <!-- <img mat-card-image> Card image. Stretches the image to the container width -->
+                <mat-card-actions align="end">
+                    <button mat-button (click)="onOpenDialog(false,post)">Edited</button>
+                    <button mat-button (click)="onRemove(post)">Delete</button>
+                </mat-card-actions>
+                <!-- <mat-card-footer> Section anchored to the bottom of the card</mat-card-footer> -->
+            </mat-card>
+        </div>
+    </div>
+</div>

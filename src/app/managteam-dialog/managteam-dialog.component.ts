@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MessageService, ConfirmationService } from 'primeng/api';
-import { DialogformComponent } from '../dialogform/dialogform.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MessageService, } from 'primeng/api';
+
 import { DataService } from '../shared/data.service';
 
 @Component({
@@ -23,17 +23,12 @@ export class ManagteamDialogComponent implements OnInit {
   users: Array<any> = this.dataService.registerUser.map((a) => a.username);
 
 
-
-
-
   constructor(private formBuilder: FormBuilder,
     public dataService: DataService,
-    private dialog: MatDialog,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService,
     // inject help us to get data from different class
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<ManagteamDialogComponent>,) { }
+    private dialogRef: MatDialogRef<ManagteamDialogComponent>) { }
 
   ngOnInit(): void {
 
@@ -53,7 +48,6 @@ export class ManagteamDialogComponent implements OnInit {
   onadd() {
     if (this.data.isEdit == true) {
       this.dataService.pushdata(this.manageform.value.teamname, this.manageform.value.user)
-
 
       for (let i = 0; i < this.data.source[this.data.source.length - 1].teamuser.length; i++) {
         let index = this.dataService.registerUser.findIndex((item) => item.username == this.data.source[this.data.source.length - 1].teamuser[i]);

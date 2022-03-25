@@ -12,8 +12,7 @@ import { User } from '../shared/user';
 })
 export class ManageUsersComponent implements OnInit {
 
-  users: User[] = []
-  user!: User;
+  
 
   permissionCols = [
     // { field: 'id', header: 'ID' },
@@ -32,10 +31,7 @@ export class ManageUsersComponent implements OnInit {
   constructor(public dataService: DataService, private dialog: MatDialog, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
-    this.dataService.getUser().subscribe((res: any) => {
-      this.users = res.user;
-
-    });
+    
 
 
   }

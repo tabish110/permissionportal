@@ -32,7 +32,11 @@ const routes: Routes = [
         path: 'customer', canActivate: [AuthGuard],
         loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule)
 
-      }
+      },
+      {
+        path: 'post',
+        loadChildren: () => import('./postscreen/postscreen.module').then(m => m.PostscreenModule)
+      },
     ]
   },
   {
