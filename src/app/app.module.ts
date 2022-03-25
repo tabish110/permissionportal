@@ -36,6 +36,7 @@ import { DatePipe } from '@angular/common';
 import { ManagteamDialogComponent } from './managteam-dialog/managteam-dialog.component';
 import { AuthGuard } from './auth.guard';
 import { CustomerDialogComponent } from './customer-dialog/customer-dialog.component';
+import { PostDialogComponent } from './post-dialog/post-dialog.component';
 
 
 
@@ -79,7 +80,8 @@ import { CustomerDialogComponent } from './customer-dialog/customer-dialog.compo
     DialogformComponent,
     FeatureComponent,
     ManagteamDialogComponent,
-    CustomerDialogComponent],
+    CustomerDialogComponent,
+    PostDialogComponent],
     
     bootstrap: [AppComponent],
   providers: [ProductService, MessageService, ConfirmationService,DatePipe,AuthGuard]

@@ -52,14 +52,14 @@
   <div>
     <mat-form-field>
       <mat-label>Role</mat-label>
-      <mat-select multiple formControlName="roles">
+      <mat-select multiple formControlName="roles" >
         <mat-select-trigger>
-          {{roles ? roles[0] : ''}}
-          <span *ngIf="roles.length > 1" class="example-additional-selection">
-            +{{roles.length - 1}} {{roles.length === 2 ? 'other' : 'More'}}
+          {{roles.value ? roles.value[0] : ''}}
+          <span *ngIf="roles.value?.length > 1" >
+            +{{roles.value.length - 1}} {{roles.value?.length === 2 ? 'more' : 'More'}}
           </span>
         </mat-select-trigger>
-        <mat-option *ngFor="let skill of roles" [value]="skill">
+        <mat-option *ngFor="let skill of Roles" [value]="skill">
           {{skill}}
         </mat-option>
       </mat-select>
@@ -68,12 +68,12 @@
       <mat-label>Team</mat-label>
       <mat-select multiple formControlName="team">
         <mat-select-trigger>
-          {{team ? roles[0] : ''}}
-          <span *ngIf="team.length > 1" class="example-additional-selection">
-            +{{team.length - 1}} {{team.length === 2 ? 'other' : 'More'}}
+          {{team.value ? team.value[0] : ''}}
+          <span *ngIf="team.value?.length > 1" >
+            +{{team.value.length - 1}} {{team.value?.length === 2 ? 'more' : 'Mores'}}
           </span>
         </mat-select-trigger>
-        <mat-option *ngFor="let skill of team" [value]="skill">
+        <mat-option *ngFor="let skill of Team" [value]="skill">
           {{skill}}
         </mat-option>
       </mat-select>
@@ -81,14 +81,14 @@
   </div>
   <mat-form-field>
     <mat-label>Route</mat-label>
-    <mat-select multiple formControlName="route">
+    <mat-select multiple formControlName="route" >
       <!-- <mat-select-trigger>
-        {{route ? route[0] : ''}}
-        <span *ngIf="route.length > 1" class="example-additional-selection">
-          +{{route.length - 1}} {{route.length === 2 ? 'other' : 'More'}}
+        {{route.value ? route.value[0] : ''}}
+        <span *ngIf="route.value?.length > 1" >
+          +{{route.value.length - 1}} {{route.value?.length === 2 ? 'more' : 'More'}}
         </span>
       </mat-select-trigger> -->
-      <mat-option *ngFor="let skill of route" [value]="skill">
+      <mat-option *ngFor="let skill of Route" [value]="skill">
         {{skill.path}}
       </mat-option>
     </mat-select>

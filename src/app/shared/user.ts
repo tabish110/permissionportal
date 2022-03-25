@@ -5,5 +5,7 @@ export interface User {
     permission: boolean,
     fullname: string,
     username: string,
-    phonenumber: number
+    phonenumber: number,
+    title:string,
+    
 }

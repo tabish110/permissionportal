@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from './user';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 
 @Injectable({
@@ -20,12 +21,14 @@ export class DataService {
         { id: 0, name: 'manage user', icon: 'supervisor_account', path: 'manageuser' },
         { id: 1, name: 'manage team', icon: 'supervised_user_circle', path: 'manageteam' },
         { id: 2, name: 'customer', icon: 'face', path: 'customer' },
-        { id: 3, name: 'product lsit', icon: 'add_shopping_cart', path: 'table' }]
+        { id: 3, name: 'product lsit', icon: 'add_shopping_cart', path: 'table' },
+        { id: 4, name: 'Posts', icon: 'add_shopping_cart', path: 'post' }
+      ]
     },
     {
       id: '1',
       email: 'moiz@gmail.com',
-      password: 'moiz', 
+      password: 'moiz',
       username: 'moiz',
       phonenumber: '032134450',
       permission: true,
@@ -36,7 +39,7 @@ export class DataService {
     {
       id: '2',
       email: 'ali@gmail.com',
-      password: 'ali', 
+      password: 'ali',
       username: 'ali',
       phonenumber: '032134450',
       permission: false,
@@ -71,27 +74,33 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-
-  getUsers() {
-    return this.http.get('assets/registeruser.json')
+  private url = 'https://jsonplaceholder.typicode.com/posts';
+  getPosts() {
+    return this.http.get(this.url)
   }
-  getUser() {
-    return this.http.get('assets/userroute.json')
+  addPost(post: any) {
+    return this.http.post(this.url, JSON.stringify(post))
+  }
+  updatePost(post: any) {
+    return this.http.put(this.url + '/' + post.user, JSON.stringify(post))
+  }
+  deletePost(id: any) {
+    return this.http.delete(this.url + '/' + id);
   }
 
-  generateuser(): User {
-    const user: User = {
-      id: '',
-      email: '',
-      password: '',
-      permission: false,
-      fullname: '',
-      username: '',
-      phonenumber: 123,
-    };
+  // generateuser(): User {
+  //   const user: User = {
+  //     id: '',
+  //     email: '',
+  //     password: '',
+  //     permission: false,
+  //     fullname: '',
+  //     username: '',
+  //     phonenumber: 123,
+  //   };
 
-    return user;
-  }
+  //   return user;
+  // }
 
   // save a customer
   createCustomer(name: string, email: string, phonenumber: number) {

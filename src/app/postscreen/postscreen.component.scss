@@ -1,0 +1,17 @@
+.content {
+    padding: 16px;
+}
+
+.content > mat-card {
+    margin-bottom: 16px;
+    mat-card{
+        height: 100px;
+    }
+}
+
+.column-label {
+    margin-right: 8px;
+    font-size: 1rem;
+}
+.mat-card {
+    height: 100%;}

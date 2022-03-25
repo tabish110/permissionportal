@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Post</h2>
+<mat-dialog-content [formGroup]="managePostForm">
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="UserID" formControlName="userId" type="text">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput formControlName="user" placeholder="ID">
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="Title" formControlName="title" type="text">
+        </mat-form-field>
+
+        <mat-form-field>
+            <textarea matInput placeholder="Body" formControlName="discription" type="text"></textarea>
+        </mat-form-field>
+    </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button pButton style="margin-right: 5px;" class="p-button-danger" (click)="onClose()">Close</button>
+    <button pButton class="p-button-info" [disabled]="managePostForm.invalid" (click)="onadd()">Save</button>
+</mat-dialog-actions>

@@ -13,16 +13,16 @@ import { DataService } from '../shared/data.service';
 export class DialogformComponent implements OnInit {
 
   dialogform: any;
-  roles: any = ['Developer', 'Testing', 'Documentation'];
-  team: Array<any> = this.dataService.teams.map((a) => a.teamname);
+  Roles  = ["Developer", "Testing", "Documentation"];
+  Team: Array<any> = this.dataService.teams.map((a) => a.teamname);
   // route: Array<any> = this.dataService.registerUser.map((a) => a.route);
-  route: Array<any> = [{ id: 0, name: 'manage user', icon: 'supervisor_account', path: 'manageuser' },
+  Route: Array<any> = [{ id: 0, name: 'manage user', icon: 'supervisor_account', path: 'manageuser' },
   { id: 1, name: 'manage team', icon: 'supervised_user_circle', path: 'manageteam' },
   { id: 2, name: 'customer', icon: 'face', path: 'customer' },
   { id: 3, name: 'product lsit', icon: 'add_shopping_cart', path: 'table' }];
   hide = true;
   hide2 = true;
-
+  
   constructor(
     private messageService: MessageService,
     public dataService: DataService,
@@ -35,9 +35,11 @@ export class DialogformComponent implements OnInit {
   ngOnInit() {
     this.dialogform = this.updateFromBuilder();
     if (this.data && this.data?.source?.route && this.data?.source?.route.length > 0) {
-      this.route = this.data?.source?.route;
+      
+        this.Route = this.data?.source?.route ;
+
     } else {
-      this.route = [{ id: 0, name: 'manage user', icon: 'supervisor_account', path: 'manageuser' },
+      this.Route = [{ id: 0, name: 'manage user', icon: 'supervisor_account', path: 'manageuser' },
       { id: 1, name: 'manage team', icon: 'supervised_user_circle', path: 'manageteam' },
       { id: 2, name: 'customer', icon: 'face', path: 'customer' },
       { id: 3, name: 'product lsit', icon: 'add_shopping_cart', path: 'table' }];
@@ -61,6 +63,15 @@ export class DialogformComponent implements OnInit {
       validator: this.confirmedPasswordValidator('password', 'confirmpassword')
 
     });
+  }
+  get roles(): FormControl {
+    return this.dialogform.get('roles') as FormControl;
+  }
+  get team(): FormControl {
+    return this.dialogform.get('team') as FormControl;
+  }
+  get route(): FormControl {
+    return this.dialogform.get('route') as FormControl;
   }
 
   // match password and confirm password
