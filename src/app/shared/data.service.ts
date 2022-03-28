@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -22,7 +22,7 @@ export class DataService {
         { id: 1, name: 'manage team', icon: 'supervised_user_circle', path: 'manageteam' },
         { id: 2, name: 'customer', icon: 'face', path: 'customer' },
         { id: 3, name: 'product lsit', icon: 'add_shopping_cart', path: 'table' },
-        { id: 4, name: 'Posts', icon: 'add_shopping_cart', path: 'post' }
+        { id: 4, name: 'Posts', icon: 'local_post_office', path: 'post' }
       ]
     },
     {
@@ -78,14 +78,20 @@ export class DataService {
   getPosts() {
     return this.http.get(this.url)
   }
+  getCheck(){
+    return this.http.get('https://demo2.datasoft.ca:9000/api/sso/ExternalProvider')
+  }
+  callSSO(){
+    return this.http.get('https://demo2.datasoft.ca:9000/api/sso/initiateSAMLRequest?return_url=http://localhost:4200/post&provider=OKTA')
+  }
   addPost(post: any) {
     return this.http.post(this.url, JSON.stringify(post))
   }
   updatePost(post: any) {
     return this.http.put(this.url + '/' + post.user, JSON.stringify(post))
   }
-  deletePost(id: any) {
-    return this.http.delete(this.url + '/' + id);
+  deletePost(post: any) {
+    return this.http.delete(this.url + '/'  + post.user);
   }
 
   // generateuser(): User {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
 import { PostDialogComponent } from '../post-dialog/post-dialog.component';
 import { DataService } from '../shared/data.service';
 
@@ -12,16 +13,19 @@ import { DataService } from '../shared/data.service';
 export class PostscreenComponent implements OnInit {
 
   Posts!: any[];
-
+  check!: any;
   constructor(public dataService: DataService,
     private dialog: MatDialog,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService) { }
+  ) { }
 
   ngOnInit(): void {
     this.dataService.getPosts().subscribe((res: any) => {
       this.Posts = res;
-
+      // testing api call DS
+      this.dataService.getCheck().subscribe(res => {
+        this.check = res
+      })
     });
   }
 
@@ -51,5 +55,11 @@ export class PostscreenComponent implements OnInit {
 
     });
 
+  }
+  // testing api calls DS
+  navigate() {
+    if (this.check.data[0].type == 1) {
+      window.location.href = 'https://demo2.datasoft.ca:9000/api/sso/initiateSAMLRequest?return_url=http://localhost:4200/post&provider=OKTA'
+    }
   }
 }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { ProductService } from './table/productservice';
@@ -37,6 +37,7 @@ import { ManagteamDialogComponent } from './managteam-dialog/managteam-dialog.co
 import { AuthGuard } from './auth.guard';
 import { CustomerDialogComponent } from './customer-dialog/customer-dialog.component';
 import { PostDialogComponent } from './post-dialog/post-dialog.component';
+import { ParamInterceptor } from './interceptor';
 
 
 
@@ -84,7 +85,14 @@ import { PostDialogComponent } from './post-dialog/post-dialog.component';
     PostDialogComponent],
     
     bootstrap: [AppComponent],
-  providers: [ProductService, MessageService, ConfirmationService,DatePipe,AuthGuard]
+  providers: [
+    ProductService, 
+    MessageService, 
+    ConfirmationService,
+    DatePipe,AuthGuard,
+    {provide: HTTP_INTERCEPTORS,
+    useClass: ParamInterceptor,
+    multi: true},]
 })
 
 export class AppModule { }

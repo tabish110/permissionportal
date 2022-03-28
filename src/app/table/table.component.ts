@@ -22,8 +22,6 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getProducts().then(data => this.products = data);
-    console.log(this.products)
-
   }
 
   //to add a new product on list
@@ -33,13 +31,12 @@ export class TableComponent implements OnInit {
     this.productDialog = true;
   }
 
-
-
   //agr product ki detail ma kuch add karna ha tw is sa ho jae ga 
   editProduct(product: Product) {
     this.product = { ...product };
     this.productDialog = true;
   }
+
   //jo product select kare ga sirf vohi delete ho is mehtod ki wajha sa
   deleteProduct(product: Product) {
     this.confirmationService.confirm({
@@ -53,6 +50,7 @@ export class TableComponent implements OnInit {
       }
     });
   }
+  
   //mehtod to hide the  dialog box
   hideDialog() {
     this.productDialog = false;
