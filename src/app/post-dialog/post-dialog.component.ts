@@ -59,7 +59,6 @@ export class PostDialogComponent implements OnInit {
         .subscribe(
           response => {
             this.managePostForm.value = this.data.source
-            console.log(response);
           })
 
       this.dialogRef.close();

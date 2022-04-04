@@ -1,0 +1,9 @@
+
+<span *ngIf="item?.hasError('required')">Empty  </span>
+<span *ngIf="item?.hasError('pattern') && !item?.hasError('required')" >invalid</span>
+<span *ngIf="item?.hasError('status : INVALID') ">
+  Please enter a valid username</span>
+
+<span  *ngIf="item?.hasError('email') && !item?.hasError('required')">
+  Please enter a valid email</span>
+

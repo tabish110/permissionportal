@@ -8,10 +8,7 @@ export class ParamInterceptor implements HttpInterceptor {
 
         if (req.url.includes('jsonplaceholder.typicode.com')) {
             const paramReq = req.clone({
-                params: req.params.set(
-                    'userId',
-                    '4'
-                )
+                params: req.params
             });
             return next.handle(paramReq);
         } else {
