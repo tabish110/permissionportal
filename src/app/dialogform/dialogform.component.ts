@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessageService } from 'primeng/api';
@@ -22,7 +22,9 @@ export class DialogformComponent implements OnInit {
   { id: 3, name: 'product lsit', icon: 'add_shopping_cart', path: 'table' }];
   hide = true;
   hide2 = true;
-  
+ 
+  @Output() sasa= this.updateFromBuilder();
+
   constructor(
     private messageService: MessageService,
     public dataService: DataService,
@@ -34,6 +36,7 @@ export class DialogformComponent implements OnInit {
 
   ngOnInit() {
     this.dialogform = this.updateFromBuilder();
+    
     if (this.data && this.data?.source?.route && this.data?.source?.route.length > 0) {
       
         this.Route = this.data?.source?.route ;
@@ -45,12 +48,12 @@ export class DialogformComponent implements OnInit {
       { id: 3, name: 'product lsit', icon: 'add_shopping_cart', path: 'table' }];
     }
   }
-
+ 
   // this the dialog form fields 
   updateFromBuilder() {
     return this.formBuilder.group({
       email: [this.data.source.email, [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      password: [this.data.source.password, Validators.required],
+      password: [this.data.source.password, [Validators.required]],
       confirmpassword: [this.data.source.password, Validators.required],
       permission: [this.data.source.permission],
       username: [this.data.source.username, [Validators.required, Validators.pattern('^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$')]],

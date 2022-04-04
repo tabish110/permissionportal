@@ -4,10 +4,15 @@
   <div>
     <mat-form-field>
       <input matInput placeholder="Full Name" type="text" formControlName="fullname" />
-    </mat-form-field>
+      <mat-error >
+        <app-parent [item]="dialogform.get('fullname')"></app-parent>
+      </mat-error>
+    </mat-form-field> 
     <mat-form-field>
       <input matInput placeholder="Username" type="text" formControlName="username" />
-      <mat-error>Please enter a valid username</mat-error>
+      <mat-error>
+        <app-parent [item]="dialogform.get('username')"></app-parent>
+      </mat-error>
     </mat-form-field>
   </div>
   <div>
@@ -16,6 +21,9 @@
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Email" type="email" formControlName="email" />
+      <mat-error >
+        <app-parent [item]="dialogform.get('email')"></app-parent>
+      </mat-error>
     </mat-form-field>
   </div>
   <div>

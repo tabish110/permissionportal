@@ -38,6 +38,7 @@ import { AuthGuard } from './auth.guard';
 import { CustomerDialogComponent } from './customer-dialog/customer-dialog.component';
 import { PostDialogComponent } from './post-dialog/post-dialog.component';
 import { ParamInterceptor } from './interceptor';
+import { ParentComponent } from './parent/parent.component';
 
 
 
@@ -82,7 +83,8 @@ import { ParamInterceptor } from './interceptor';
     FeatureComponent,
     ManagteamDialogComponent,
     CustomerDialogComponent,
-    PostDialogComponent],
+    PostDialogComponent,
+    ParentComponent],
     
     bootstrap: [AppComponent],
   providers: [

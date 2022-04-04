@@ -91,7 +91,7 @@ export class DataService {
     return this.http.put(this.url + '/' + post.user, JSON.stringify(post))
   }
   deletePost(post: any) {
-    return this.http.delete(this.url + '/'  + post.user);
+    return this.http.delete(this.url + '/'  + post,);
   }
 
   // generateuser(): User {
